@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+        <!-- mui -->
+        <link href="../css/mui.min.css" rel="stylesheet"/>
+        <link href="../css/main.css" rel="stylesheet"/>
+        <style>
+			#divscanpanel {
+				height:610px;
+				width:100%;
+			}
+        </style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-back mui-pull-left menua" id="btnback"></a>
+            <a class="mui-icon mui-icon-camera mui-pull-right adda" id="opencamera"></a>
+            <h1 class="mui-title">二维码</h1>
+        </header>
+        <div class="mui-content">
+        	<div id= "divscanpanel"></div>
+        </div>
+	</body>
+</html>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+			mui.plusReady(function() {
+					mui.init({
+						swipeBack: true
+					});
+					
+					startRecognize();
+        			scan.start();
+        			
+        			$("#btnback").bind("tap", function() {
+						mui.back();
+					});
+					
+					$("#opencamera").bind("tap", function() {
+						if (mui.os.plus) {
+							var a = [{
+								title: "拍照"
+							}, {
+								title: "从手机相册选择"
+							}];
+							plus.nativeUI.actionSheet({
+								cancel: "取消",
+								buttons: a
+							}, function(b) { /*actionSheet 按钮点击事件*/
+								switch (b.index) {
+									case 0:
+										break;
+									case 1:
+										//getImage(); /*拍照*/
+										break;
+									case 2:
+										//galleryImg();/*打开相册*/
+										break;
+									default:
+										break;
+								}
+							})
+						}
+					});
+				});
+				
+				var scan = null;
+			    var isOpen = false; // 闪光灯是否开始标志 true:闪光灯已经开启 false:闪光灯关闭
+			    // 条码识别成功事件
+			    function onmarked( type, result ) {
+			        var text = '未知: ';
+			        switch(type){
+			            case plus.barcode.QR:
+			            break;
+			            case plus.barcode.EAN13:
+			            text = 'EAN13: ';
+			            break;
+			            case plus.barcode.EAN8:
+			            text = 'EAN8: ';
+			            break;
+			        }
+			        
+			        mui.alert(result);
+			    }
+			    // 创建扫描控件
+			    function startRecognize() {
+			        scan = new plus.barcode.Barcode("divscanpanel");
+			        scan.onmarked = onmarked; 
+			    }
+        </script>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+        <!-- mui -->
+        <link href="../css/mui.min.css" rel="stylesheet"/>
+        <link href="../css/main.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">新建快速任务</h1>
+        </header>
+        <div class="mui-content">
+        	<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label id="lbldatetime" style="width: 100%;"></label>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>定位构件:</label>
+						<input type="text" id="txtComponent" class="mui-input-clear" placeholder="定位构件">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>任务名称:</label>
+						<input type="text" id="txtTaskName" class="mui-input-clear" placeholder="不能为空">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>任务描述:</label>
+						<input type="text" id="txtTaskDecription" class="mui-input-clear" placeholder="任务描述">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>处理人:</label>
+						<input type="text" id="txtHandlePerson" class="mui-input-clear" placeholder="不能为空">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>处理时间:</label>
+						<input type="datetime" id="txtHandleTime" placeholder="" readonly="readonly">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>现场照片:</label>
+						<img src="../images/prc.png" style="width: 80px;height: 80px;">
+						<img src="../images/prc.png" style="width: 80px;height: 80px;">
+						<a class="mui-icon mui-icon-camera mui-pull-right" id="opencamera"></a>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-button-row">
+						<button type="button" id="btnSave" class="mui-btn mui-btn-primary" style="width: 100%;" >确定</button>
+					</div>
+				</li>
+			</ul>
+        </div>
+        <footer>
+        	<nav class="mui-bar mui-bar-tab">
+	         	<a class="mui-tab-item" href="../task/index.html">
+	         		<span class="mui-icon mui-icon-list"></span>
+	         		<span class="mui-tab-label">任务</span>
+	         	</a>
+	         	<a class="mui-tab-item mui-active" href="">
+	         		<span class="mui-icon mui-icon-compose"></span>
+	         		<span class="mui-tab-label">发布</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="">
+	         		<span class="mui-icon mui-icon-gear"></span>
+	         		<span class="mui-tab-label">工作台</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="">
+	         		<span class="mui-icon mui-icon-person"></span>
+	         		<span class="mui-tab-label">个人中心</span>
+	         	</a>
+         	</nav>
+        </footer>
+	</body>
+</html>
+<script src="../js/mui.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		mui.init({
+			swipeBack: true
+		});
+					
+		GetCurrentDateTime();
+		
+		$("#txtHandleTime").bind("tap", function() {
+			var dDate = new Date();
+		    //设置当前日期（不设置默认当前日期）
+		    dDate.setFullYear(2016, 7, 16);
+		    var minDate = new Date();
+		    //最小时间
+		    minDate.setFullYear(2010, 0, 1);
+		    var maxDate = new Date();
+		    //最大时间
+		    maxDate.setFullYear(2016, 11, 31);
+		    plus.nativeUI.pickDate(function(e) {
+		        var d = e.date;
+		        $("#txtHandleTime").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+		    }, function(e) {
+		        
+		    }, {
+		        title: '请选择日期',
+		        date:dDate,
+		        minDate: minDate,
+		        maxDate: maxDate
+		    });
+		});
+		$("#btnSave").bind("tap", function() {
+			var task = {};
+			task.Component = $("#txtComponent").val();
+			task.TaskName = $("#txtTaskName").val();
+			task.TaskDecription = $("#txtTaskDecription").val();
+			task.HandlePerson = $("#txtHandlePerson").val();
+			task.HandleTime = $("#txtHandleTime").val();
+			
+			if(task.TaskName == "")
+			{
+				mui.alert("任务名称不能为空！");
+				return;
+			}
+			
+			if(task.HandlePerson == "")
+			{
+				mui.alert("处理人不能为空！");
+				return;
+			}
+			
+			var tasklist = new Array();
+			var hastasklist = plus.storage.getItem("tasklist");
+			if(hastasklist != null)
+			{
+				var jsontasklist=JSON.parse(hastasklist);
+				for(var index in jsontasklist)
+				{
+					tasklist.push(jsontasklist[index]);
+				}
+			}
+
+			tasklist.push(task);
+			plus.storage.setItem("tasklist",JSON.stringify(tasklist));
+			
+			mui.openWindow({  
+			    url: "index.html",
+			    createNew:true,
+			    show: {  
+			        autoShow: true, //页面loaded事件发生后自动显示，默认为true  
+			    },  
+			    waiting: {  
+			        autoShow: true, //自动显示等待框，默认为true  
+			    }  
+			});
+		});
+		
+		//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+			var url = this.getAttribute('href');
+			if(url == "")
+			{
+				return;
+			}
+			
+			mui.openWindow({
+				url:url,
+				createNew:true,
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
+				}
+			});
+		});
+		
+		$("#startscan").bind("tap",function(){
+			mui.openWindow({
+				url:'../public/scanerweima.html',
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
+				}
+			});
+		});
+		
+		$("#opencamera").bind("tap", function() {
+			if (mui.os.plus) {
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: a
+				}, function(b) { /*actionSheet 按钮点击事件*/
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							//getImage(); /*拍照*/
+							break;
+						case 2:
+							//galleryImg();/*打开相册*/
+							break;
+						default:
+							break;
+					}
+				})
+			}
+		});
+	});
+	
+	function GetCurrentDateTime()
+	{
+		var arrday=["天", "一", "二", "三", "四", "五", "六"];
+		var myDate = new Date();
+		$("#lbldatetime").text(myDate.getFullYear() +'年'+myDate.getMonth()+'月'+myDate.getDate()+'日   星期'+arrday[myDate.getDay()]);
+	}
+</script>

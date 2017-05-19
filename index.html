@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+ 
+        <!-- mui -->
+        <link href="css/mui.min.css" rel="stylesheet"/>
+        <link href="css/main.css" rel="stylesheet"/>
+    </head>
+    <body>
+    </body>
+</html>
+<script src="js/mui.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.init({
+		swipeBack: true
+	});
+		
+	var aniShow = {};
+	mui.plusReady(function() {
+			mui.openWindow({
+					url:"map/index.html",
+					createNew:true,
+					show:{
+						autoShow: true
+					},
+					waiting:{
+						autoShow:true
+					}
+			});
+	});
+</script>

@@ -1,0 +1,39 @@
+{
+	"index.html": {
+		"resources": [
+			"js/jquery-1.11.3.min.js",
+			"css/main.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"map/index.html"
+		]
+	},
+	"map/index.html": {
+		"resources": [
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"task/index.html"
+		]
+	},
+	"task/index.html": {
+		"resources": [
+			"images/qiye.png"
+		],
+		"refer": [
+			"task/publish.html",
+			"public/scanerweima.html",
+			"map/index.html"
+		]
+	},
+	"task/publish.html": {
+		"resources": [
+			"images/prc.png"
+		],
+		"refer": [
+			"task/index.html"
+		]
+	}
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+ 
+        <!-- mui -->
+        <link href="../css/mui.min.css" rel="stylesheet"/>
+        <link href="../css/main.css" rel="stylesheet"/>
+        <style>
+			#allmap {
+				height:560px;
+				width:100%;
+			}
+        </style>
+    </head>
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">桥梁资产综合管养平台</h1>
+        </header>
+        <div class="mui-content">
+        	<div style="padding-left:8px;padding-right:8px;padding-top: 20px;position: absolute;z-index: 2;width: 100%;">
+	        	<div class="mui-input-row mui-search">
+		    		<input type="search" class="mui-input-clear" placeholder="搜索">
+				</div>
+			</div>
+        	<div id="allmap">
+			    地图加载中...
+			</div>
+		</div>
+		<footer>
+        	<nav class="mui-bar mui-bar-tab">
+	         	<a class="mui-tab-item" href="../task/index.html">
+	         		<span class="mui-icon mui-icon-list"></span>
+	         		<span class="mui-tab-label">任务</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="../task/publish.html">
+	         		<span class="mui-icon mui-icon-compose"></span>
+	         		<span class="mui-tab-label">发布</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="">
+	         		<span class="mui-icon mui-icon-gear"></span>
+	         		<span class="mui-tab-label">工作台</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="">
+	         		<span class="mui-icon mui-icon-person"></span>
+	         		<span class="mui-tab-label">个人中心</span>
+	         	</a>
+         	</nav>
+        </footer>
+    </body>
+</html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HR3RRyTsXYdQ3QzzG5yUkg0q"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script src="../js/mui.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		mui.init({
+			swipeBack: true
+		});
+		
+		plus.geolocation.getCurrentPosition(translatePoint,function(e){
+        	mui.toast("异常:" + e.message);
+    	});
+    	
+    	//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+			var url = this.getAttribute('href');
+			if(url == "")
+			{
+				return;
+			}
+			
+			mui.openWindow({
+				url:url,
+				createNew:true,
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
+				}
+			});
+		});
+	});
+	
+	function translatePoint(position){
+	    var currentLon = position.coords.longitude;
+	    var currentLat = position.coords.latitude;
+	    var gpsPoint = new BMap.Point(currentLon,currentLat);
+	    BMap.Convertor.translate(gpsPoint,2,initMap); //坐标转换
+	}	
+	
+	function initMap(point){
+	    map = new BMap.Map("allmap"); //创建地图
+	    map.addControl(new BMap.NavigationControl());
+	    map.addControl(new BMap.ScaleControl());
+	    map.addControl(new BMap.OverviewMapControl());
+	    map.centerAndZoom(point,15);
+	    map.addOverlay(new BMap.Marker(point));	 
+	}
+</script>
