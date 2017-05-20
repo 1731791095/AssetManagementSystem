@@ -209,7 +209,12 @@
 			},
 			"map/index.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/jquery-1.11.3.min.js",
+					"css/main.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css"
 				],
 				"refer": [
 					"task/index.html"
@@ -232,7 +237,8 @@
 				"refer": [
 					"task/publish.html",
 					"public/scanerweima.html",
-					"map/index.html"
+					"map/index.html",
+					"task/task-action.html"
 				],
 				"priority": 0
 			},
@@ -243,6 +249,16 @@
 				"refer": [
 					"task/index.html"
 				],
+				"priority": 0
+			},
+			"task/task-action.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
