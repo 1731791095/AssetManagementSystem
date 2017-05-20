@@ -31,7 +31,9 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/mui.pullToRefresh.js",
-			"js/mui.pullToRefresh.material.js"
+			"js/mui.pullToRefresh.material.js",
+			"js/main.js",
+			"css/iconfont.css"
 		],
 		"refer": [
 			"task/publish.html",
