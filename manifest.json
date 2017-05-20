@@ -197,10 +197,13 @@
 					"js/jquery-1.11.3.min.js",
 					"css/main.css",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/main.js",
+					"css/iconfont.css"
 				],
 				"refer": [
-					"map/index.html"
+					"map/index.html",
+					"task/index.html"
 				],
 				"priority": 0
 			},
