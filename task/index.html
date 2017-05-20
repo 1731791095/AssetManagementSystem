@@ -9,6 +9,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/iconfont.css">
+		<link rel="stylesheet" href="../css/main.css">
 		<style>
 			html,
 			body {
@@ -105,11 +107,17 @@
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-segmented-control">
-					<a class="mui-control-item mui-active" href="1">新任务</a>
-					<a class="mui-control-item" href="2">正在执行</a>
-					<a class="mui-control-item" href="3">已完成</a>
-
+				<div style="background-color: white;border-bottom: 1px solid #eee;">
+					<div style="margin-left:8px;margin-right:8px;padding-top: 10px;padding-bottom: 10px;">
+						<div class="mui-input-row mui-search">
+							<input type="search" class="mui-input-clear" placeholder="搜索">
+						</div>
+						<div id="sliderSegmentedControl" class="mui-segmented-control">
+							<a class="mui-control-item mui-active" href="1">新任务</a>
+							<a class="mui-control-item" href="2">正在执行</a>
+							<a class="mui-control-item" href="3">已完成</a>
+						</div>
+					</div>
 				</div>
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -173,7 +181,7 @@
 							refreshApi.pullUpLoading();
 						});
 
-						mui('#tasklist').on('tap','a',function(e){
+						mui('#tasklist').on('tap', 'a', function(e) {
 							var url = this.getAttribute('href');
 							if(url == "") {
 								return;
@@ -185,15 +193,15 @@
 								show: {
 									autoShow: true
 								},
-								extras:{
-									taskName:taskName
+								extras: {
+									taskName: taskName
 								},
 								waiting: {
 									autoShow: true
 								}
 							});
 						})
-						
+
 						//选项卡点击事件
 						mui('.mui-bar-tab').on('tap', 'a', function(e) {
 							var url = this.getAttribute('href');
@@ -293,7 +301,7 @@
 						var jsontasklist = JSON.parse(tasklist);
 						jsontasklist.forEach(function(item, key, list) {
 							var li = '<li class="mui-table-view-cell mui-media">' +
-								'<a href="task-action.html" data-taskName="'+item.TaskName+'">' +
+								'<a href="task-action.html" data-taskName="' + item.TaskName + '">' +
 								'<img class="mui-media-object mui-pull-left" src="' + item.TaskImage + '">' +
 								'<div class="mui-media-body">' +
 								item.TaskName +
