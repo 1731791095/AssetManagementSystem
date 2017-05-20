@@ -209,18 +209,27 @@
 					"fonts/mui.ttf"
 				],
 				"refer": [
-					"task/index.html"
+					"task/index.html",
+					"task/publish.html"
 				],
 				"priority": 0
 			},
 			"task/index.html": {
 				"resources": [
-					"images/qiye.png"
+					"images/qiye.png",
+					"js/jquery-1.11.3.min.js",
+					"css/main.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [
 					"task/publish.html",
 					"public/scanerweima.html",
-					"map/index.html"
+					"map/index.html",
+					"task/task-action.html"
 				],
 				"priority": 0
 			},
@@ -231,6 +240,21 @@
 				"refer": [
 					"task/index.html"
 				],
+				"priority": 0
+			},
+			"task/task-action.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jquery-1.11.3.min.js",
+					"js/mui.dtpicker.js",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
