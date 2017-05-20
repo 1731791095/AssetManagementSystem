@@ -3,7 +3,6 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -101,9 +100,9 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon mui-icon-home mui-pull-left"></a>
+			<a class="mui-icon iconfont icon-rili mui-pull-left"></a>
 			<h1 class="mui-title">我的任务</h1>
-
+			<a id="startscan" class="mui-icon iconfont icon-saoyisao1 mui-pull-right"></a>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
@@ -132,192 +131,189 @@
 				</div>
 			</div>
 		</div>
-
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/jquery-1.11.3.min.js"></script>
-		<script src="../js/mui.pullToRefresh.js"></script>
-		<script src="../js/mui.pullToRefresh.material.js"></script>
-		<script>
-			mui.init();
-
-			(function(mui) {
-				//阻尼系数
-				var deceleration = mui.os.ios ? 0.003 : 0.0009;
-				mui('.mui-scroll-wrapper').scroll({
-					bounce: false,
-					indicators: true, //是否显示滚动条
-					deceleration: deceleration
-				});
-
-				mui.plusReady(function() {
-					setTaskList();
-
-					mui.ready(function() {
-						//循环初始化所有下拉刷新，上拉加载。
-						var mui_scroll = mui('.mui-slider-group .mui-scroll');
-
-						var refreshApi = mui_scroll.pullToRefresh({
-							down: {
-								callback: function() {
-									var self = this;
-									getTaskList(true, function() {
-										self.endPullDownToRefresh();
-									})
-								}
-							},
-							up: {
-								auto: true,
-								callback: function() {
-									var self = this;
-									getTaskList(false, function() {
-										self.endPullUpToRefresh();
-									})
-								}
-							}
-						});
-
-						mui('#sliderSegmentedControl').on('tap', '.mui-control-item', function() {
-							clearTaskList();
-							refreshApi.pullUpLoading();
-						});
-
-						mui('#tasklist').on('tap', 'a', function(e) {
-							var url = this.getAttribute('href');
-							if(url == "") {
-								return;
-							}
-							var taskName = this.getAttribute('data-taskName');
-							mui.openWindow({
-								url: url,
-								createNew: true,
-								show: {
-									autoShow: true
-								},
-								extras: {
-									taskName: taskName
-								},
-								waiting: {
-									autoShow: true
-								}
-							});
-						})
-
-						//选项卡点击事件
-						mui('.mui-bar-tab').on('tap', 'a', function(e) {
-							var url = this.getAttribute('href');
-							if(url == "") {
-								return;
-							}
-
-							mui.openWindow({
-								url: url,
-								createNew: true,
-								show: {
-									autoShow: true
-								},
-								waiting: {
-									autoShow: true
-								}
-							});
-						});
-					});
-
-				});
-
-				var createFragment = function(ul, index, count, reverse) {
-					var length = ul.querySelectorAll('li').length;
-					var fragment = document.createDocumentFragment();
-					var li;
-					for(var i = 0; i < count; i++) {
-						li = document.createElement('li');
-						li.className = 'mui-table-view-cell';
-						li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
-						fragment.appendChild(li);
-					}
-					return fragment;
-				};
-
-				function setTaskList() {
-					var taskList = new Array();
-					taskList.push({
-						TaskName: '2017年4月1日日巡查',
-						TaskDecription: '检查资产：路面、路基、钢箱梁……',
-						TaskImage: '../images/qiye.png',
-						TaskState: 1
-					});
-					taskList.push({
-						TaskName: '2017年4月1日日巡查',
-						TaskDecription: '检查资产：北引桥左幅第1联主梁、……',
-						TaskImage: '../images/qiye.png',
-						TaskState: 1
-					})
-					taskList.push({
-						TaskName: '2016年10月22日钢箱梁内部外观…',
-						TaskDecription: '检查资产：钢箱梁',
-						TaskImage: '../images/qiye.png',
-						TaskState: 1
-					})
-					taskList.push({
-						TaskName: '2016年10月22日斜拉索索力',
-						TaskDecription: '检查资产：斜拉索',
-						TaskImage: '../images/qiye.png',
-						TaskState: 1
-					})
-
-					var item = JSON.stringify(taskList);
-					plus.storage.setItem('tasklist', item)
-				}
-
-				function clearTaskList() {
-					var $taskList = $("#tasklist");
-					if(!$taskList) {
-						return;
-					}
-					$taskList.empty();
-				}
-
-				function getTaskList(isDown, callBack) {
-
-					var taskStateA = $('#sliderSegmentedControl .mui-active');
-					if(!taskStateA) {
-						return;
-					}
-					var state = taskStateA.attr('href');
-
-					var $taskList = $("#tasklist");
-					if(!$taskList) {
-						return;
-					}
-					if(isDown) {
-						$taskList.empty();
-					}
-
-					setTimeout(function() {
-						var tasklist = plus.storage.getItem("tasklist");
-
-						if(tasklist == null) {
-							return;
-						}
-						var jsontasklist = JSON.parse(tasklist);
-						jsontasklist.forEach(function(item, key, list) {
-							var li = '<li class="mui-table-view-cell mui-media">' +
-								'<a href="task-action.html" data-taskName="' + item.TaskName + '">' +
-								'<img class="mui-media-object mui-pull-left" src="' + item.TaskImage + '">' +
-								'<div class="mui-media-body">' +
-								item.TaskName +
-								'<p class="mui-ellipsis">' + item.TaskDecription + '</p>' +
-								'</div>' +
-								'</a>' +
-								'</li>';
-							$taskList.append($(li));
-						});
-						callBack && callBack();
-					}, 1000)
-
-				}
-
-			})(mui);
-		</script>
 	</body>
-
 </html>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/mui.pullToRefresh.js"></script>
+<script src="../js/mui.pullToRefresh.material.js"></script>
+<script>
+	(function(mui) {
+		//阻尼系数
+		var deceleration = mui.os.ios ? 0.003 : 0.0009;
+		mui('.mui-scroll-wrapper').scroll({
+			bounce: false,
+			indicators: true, //是否显示滚动条
+			deceleration: deceleration
+		});
+
+		mui.plusReady(function() {
+			setTaskList();
+
+			mui.ready(function() {
+				//循环初始化所有下拉刷新，上拉加载。
+				var mui_scroll = mui('.mui-slider-group .mui-scroll');
+
+				var refreshApi = mui_scroll.pullToRefresh({
+					down: {
+						callback: function() {
+							var self = this;
+							getTaskList(true, function() {
+								self.endPullDownToRefresh();
+							})
+						}
+					},
+					up: {
+						auto: true,
+						callback: function() {
+							var self = this;
+							getTaskList(false, function() {
+								self.endPullUpToRefresh();
+							})
+						}
+					}
+				});
+
+				mui('#sliderSegmentedControl').on('tap', '.mui-control-item', function() {
+					clearTaskList();
+					refreshApi.pullUpLoading();
+				});
+
+				mui('#tasklist').on('tap', 'a', function(e) {
+					var url = this.getAttribute('href');
+					if(url == "") {
+						return;
+					}
+					var taskName = this.getAttribute('data-taskName');
+					mui.openWindow({
+						url: url,
+						createNew: true,
+						show: {
+							autoShow: true
+						},
+						extras: {
+							taskName: taskName
+						},
+						waiting: {
+							autoShow: true
+						}
+					});
+				})
+
+				//选项卡点击事件
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					var url = this.getAttribute('href');
+					if(url == "") {
+						return;
+					}
+
+					mui.openWindow({
+						url: url,
+						createNew: true,
+						show: {
+							autoShow: true
+						},
+						waiting: {
+							autoShow: true
+						}
+					});
+				});
+			});
+
+		});
+
+		var createFragment = function(ul, index, count, reverse) {
+			var length = ul.querySelectorAll('li').length;
+			var fragment = document.createDocumentFragment();
+			var li;
+			for(var i = 0; i < count; i++) {
+				li = document.createElement('li');
+				li.className = 'mui-table-view-cell';
+				li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
+				fragment.appendChild(li);
+			}
+			return fragment;
+		};
+
+		function setTaskList() {
+			var taskList = new Array();
+			taskList.push({
+				TaskName: '2017年4月1日日巡查',
+				TaskDecription: '检查资产：路面、路基、钢箱梁……',
+				TaskImage: '../images/qiye.png',
+				TaskState: 1
+			});
+			taskList.push({
+				TaskName: '2017年4月1日日巡查',
+				TaskDecription: '检查资产：北引桥左幅第1联主梁、……',
+				TaskImage: '../images/qiye.png',
+				TaskState: 1
+			})
+			taskList.push({
+				TaskName: '2016年10月22日钢箱梁内部外观…',
+				TaskDecription: '检查资产：钢箱梁',
+				TaskImage: '../images/qiye.png',
+				TaskState: 1
+			})
+			taskList.push({
+				TaskName: '2016年10月22日斜拉索索力',
+				TaskDecription: '检查资产：斜拉索',
+				TaskImage: '../images/qiye.png',
+				TaskState: 1
+			})
+
+			var item = JSON.stringify(taskList);
+			plus.storage.setItem('tasklist', item)
+		}
+
+		function clearTaskList() {
+			var $taskList = $("#tasklist");
+			if(!$taskList) {
+				return;
+			}
+			$taskList.empty();
+		}
+
+		function getTaskList(isDown, callBack) {
+
+			var taskStateA = $('#sliderSegmentedControl .mui-active');
+			if(!taskStateA) {
+				return;
+			}
+			var state = taskStateA.attr('href');
+
+			var $taskList = $("#tasklist");
+			if(!$taskList) {
+				return;
+			}
+			if(isDown) {
+				$taskList.empty();
+			}
+
+			setTimeout(function() {
+				var tasklist = plus.storage.getItem("tasklist");
+
+				if(tasklist == null) {
+					return;
+				}
+				var jsontasklist = JSON.parse(tasklist);
+				jsontasklist.forEach(function(item, key, list) {
+					var li = '<li class="mui-table-view-cell mui-media">' +
+						'<a href="task-action.html" data-taskName="' + item.TaskName + '">' +
+						'<img class="mui-media-object mui-pull-left" src="' + item.TaskImage + '">' +
+						'<div class="mui-media-body">' +
+						item.TaskName +
+						'<p class="mui-ellipsis">' + item.TaskDecription + '</p>' +
+						'</div>' +
+						'</a>' +
+						'</li>';
+					$taskList.append($(li));
+				});
+				callBack && callBack();
+			}, 1000)
+
+		}
+
+	})(mui);
+</script>

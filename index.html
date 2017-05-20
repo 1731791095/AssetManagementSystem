@@ -8,40 +8,53 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!-- mui -->
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<link href="css/iconfont.css" rel="stylesheet" />
 		<link href="css/main.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
 	</head>
+
 	<body>
 		<nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="map/index.html" pagetype="main">
-				<span class="mui-icon iconfont icon-shouye2"></span>
+				<svg class="mui-icon iconfont icon" aria-hidden="true">
+					<use xlink:href="#icon-shouye2"></use>
+				</svg>
 				<span class="mui-tab-label">首页</span>
 			</a>
 			<a class="mui-tab-item" href="task/index.html" pagetype="main">
-				<span class="mui-icon iconfont icon-wenjianjia"></span>
+				<svg class="mui-icon iconfont icon" aria-hidden="true">
+					<use xlink:href="#icon-wenjianjia"></use>
+				</svg>
 				<span class="mui-tab-label">任务</span>
 			</a>
 			<a class="mui-tab-item" href="task/publish.html" pagetype="sub">
-				<span class="mui-icon iconfont icon-tianjia4"></span>
+				<svg class="mui-icon iconfont icon" aria-hidden="true">
+					<use xlink:href="#icon-fabu2"></use>
+				</svg>
 				<span class="mui-tab-label">发布</span>
 			</a>
 			<a class="mui-tab-item" href="work/index.html" pagetype="main">
-				<span class="mui-icon iconfont icon-shujuxiazai"></span>
+				<svg class="mui-icon iconfont icon" aria-hidden="true">
+					<use xlink:href="#icon-shujuxiazai"></use>
+				</svg>
 				<span class="mui-tab-label">工作台</span>
 			</a>
 			<a class="mui-tab-item" href="my/index.html" pagetype="main">
-				<span class="mui-icon iconfont icon-gerenzhongxin"></span>
+				<svg class="mui-icon iconfont icon" aria-hidden="true">
+					<use xlink:href="#icon-gerenzhongxin"></use>
+				</svg>
 				<span class="mui-tab-label">个人中心</span>
 			</a>
 		</nav>
 	</body>
+
 </html>
 <script src="js/mui.min.js"></script>
 <!-- jquery -->
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/iconfont.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
-mui.plusReady(function() {
-	openwindow("map/index.html",subpage_style);
-});
+	mui.plusReady(function() {
+		openwindow("map/index.html", subpage_style);
+	});
 </script>

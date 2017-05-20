@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!-- mui -->
         <link href="../css/mui.min.css" rel="stylesheet"/>
         <link href="../css/iconfont.css" rel="stylesheet" />
@@ -16,9 +18,8 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-            <a class="mui-icon mui-icon-back mui-pull-left menua" id="btnback"></a>
-            <a class="mui-icon mui-icon-camera mui-pull-right adda" id="opencamera"></a>
-            <h1 class="mui-title">二维码</h1>
+            <a class="mui-action-back mui-icon mui-icon-back mui-pull-left menua" id="btnback"></a>
+            <h1 class="mui-title">扫一扫</h1>
         </header>
         <div class="mui-content">
         	<div id= "divscanpanel"></div>
@@ -29,17 +30,9 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 			mui.plusReady(function() {
-					mui.init({
-						swipeBack: true
-					});
-					
 					startRecognize();
         			scan.start();
         			
-        			$("#btnback").bind("tap", function() {
-						mui.back();
-					});
-					
 					$("#opencamera").bind("tap", function() {
 						if (mui.os.plus) {
 							var a = [{
