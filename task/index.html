@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
-        <!-- mui -->
-        <link href="../css/mui.min.css" rel="stylesheet"/>
-        <link href="../css/main.css" rel="stylesheet"/>
-        <style>
-        	.userInfo {
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/main.css" rel="stylesheet" />
+		<style>
+			.userInfo {
 				background-color: white;
 				height: 120px;
 				width: 100%;
 			}
-        </style>
-    </head>
-    <body>
-        <header class="mui-bar mui-bar-nav">
-            <a class="mui-icon mui-icon-home mui-pull-left menua" id="gohome"></a>
-            <a class="mui-icon mui-icon-settings mui-pull-right adda" id="startscan"></a>
-            <h1 class="mui-title">我的任务</h1>
-        </header>
-        <div class="mui-content">
-        	<div class="userInfo">
-        		<div style="margin: 8px 8px;padding-top: 10px;">
-	        		<div class="mui-input-row mui-search">
-		    			<input type="search" class="mui-input-clear" placeholder="搜索">
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-home mui-pull-left menua" id="gohome"></a>
+			<a class="mui-icon mui-icon-settings mui-pull-right adda" id="startscan"></a>
+			<h1 class="mui-title">我的任务</h1>
+		</header>
+		<div class="mui-content">
+			<div class="userInfo">
+				<div style="margin: 8px 8px;padding-top: 10px;">
+					<div class="mui-input-row mui-search">
+						<input type="search" class="mui-input-clear" placeholder="搜索">
 					</div>
 					<div id="taskselect" class="mui-segmented-control">
 						<a class="mui-control-item mui-active" href="1">
@@ -34,128 +38,62 @@
 							正在执行
 						</a>
 						<a class="mui-control-item" href="3">
-					  		已完成
+							已完成
 						</a>
 					</div>
 				</div>
-        	</div>
+			</div>
 			<ul class="mui-table-view" id="tasklist">
-			    <li class="mui-table-view-cell mui-media">
-			        <a href="javascript:;">
-			            <img class="mui-media-object mui-pull-left" src="../images/qiye.png">
-			            <div class="mui-media-body">
-			                幸福
-			                <p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-			            </div>
-			        </a>
-			    </li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/qiye.png">
+						<div class="mui-media-body">
+							幸福
+							<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+						</div>
+					</a>
+				</li>
 			</ul>
 		</div>
-		<footer>
-        	<nav class="mui-bar mui-bar-tab">
-	         	<a class="mui-tab-item mui-active" href="">
-	         		<span class="mui-icon mui-icon-list"></span>
-	         		<span class="mui-tab-label">任务</span>
-	         	</a>
-	         	<a class="mui-tab-item" href="../task/publish.html">
-	         		<span class="mui-icon mui-icon-compose"></span>
-	         		<span class="mui-tab-label">发布</span>
-	         	</a>
-	         	<a class="mui-tab-item" href="">
-	         		<span class="mui-icon mui-icon-gear"></span>
-	         		<span class="mui-tab-label">工作台</span>
-	         	</a>
-	         	<a class="mui-tab-item" href="">
-	         		<span class="mui-icon mui-icon-person"></span>
-	         		<span class="mui-tab-label">个人中心</span>
-	         	</a>
-         	</nav>
-        </footer>
-    </body>
+	</body>
 </html>
 <script src="../js/mui.min.js"></script>
 <!-- jquery -->
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
 	mui.plusReady(function() {
-		mui.init({
-			swipeBack: true
-		});
-					
 		$("#taskselect .mui-control-item").bind("tap", function() {
-			//mui.alert(this.getAttribute('href'));
+			mui.alert(this.getAttribute('href'));
 		});
-					
-		$("#gohome").bind("tap",function(){
-			mui.openWindow({
-				url:'../map/index.html',
-				show:{
-					autoShow: true
-				},
-				waiting:{
-					autoShow:true
-				}
-			});
-		});
-		
-		$("#startscan").bind("tap",function(){
-			mui.openWindow({
-				url:'../public/scanerweima.html',
-				show:{
-					autoShow: true
-				},
-				waiting:{
-					autoShow:true
-				}
-			});
-		});
-		
-		//选项卡点击事件
-		mui('.mui-bar-tab').on('tap', 'a', function(e) {
-			var url = this.getAttribute('href');
-			if(url == "")
-			{
-				return;
-			}
-			
-			mui.openWindow({
-				url:url,
-				createNew:true,
-				show:{
-					autoShow: true
-				},
-				waiting:{
-					autoShow:true
-				}
-			});
+
+		$("#startscan").bind("tap", function() {
+			openwindow("../public/scanerweima.html");
 		});
 		
 		getTaskList();
 	});
-	
-	function getTaskList()
-	{
+
+	function getTaskList() {
 		var tasklist = plus.storage.getItem("tasklist");
-		if(tasklist == null)
-		{
+		if(tasklist == null) {
 			return;
 		}
 
 		var content = "";
-		var jsontasklist=JSON.parse(tasklist);
-		for(var index in jsontasklist)
-		{
+		var jsontasklist = JSON.parse(tasklist);
+		for(var index in jsontasklist) {
 			content += "<li class=\"mui-table-view-cell mui-media\">";
 			content += "<a href=\"javascript:;\">";
 			content += "<img class=\"mui-media-object mui-pull-left\" src=\"../images/qiye.png\">";
 			content += "<div class=\"mui-media-body\">";
 			content += jsontasklist[index].TaskName;
-			content += "<p class=\"mui-ellipsis\">"+jsontasklist[index].TaskDecription+"</p>"
+			content += "<p class=\"mui-ellipsis\">" + jsontasklist[index].TaskDecription + "</p>"
 			content += "</div>";
 			content += "</a>";
 			content += "</li>";
 		}
-		
+
 		$("#tasklist").html(content);
 	}
 </script>

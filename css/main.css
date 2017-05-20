@@ -1,5 +1,36 @@
-.mui-bar-nav{height: 50px;}
-body{font-family: "微软雅黑"; color:#282828 ;}
-.mui-bar-nav a,.mui-bar-nav h1{font-size: 27px;align-self: center; }
-.mui-media-body{font-family: "微软雅黑";font-size: 16px;}
-.mui-input-row{font-family: "微软雅黑";font-size: 15px;}
+body {
+	font-family: "微软雅黑";
+	color: #2286e6;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mui-bar-nav {
+	background-color: #0099FF;
+}
+
+.mui-bar-nav a,
+.mui-bar-nav h1 {
+	align-self: center;
+	color: white;
+}
+
+.mui-media-body {
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+
+.mui-input-row {
+	font-family: "微软雅黑";
+	font-size: 15px;
+}
+
+.mui-content {
+	height: 100%;
+}
+
+.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+	border-bottom: 0px solid #eee;
+}

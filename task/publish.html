@@ -2,13 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!-- mui -->
         <link href="../css/mui.min.css" rel="stylesheet"/>
+        <link href="../css/iconfont.css" rel="stylesheet" />
         <link href="../css/main.css" rel="stylesheet"/>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
             <h1 class="mui-title">新建快速任务</h1>
         </header>
         <div class="mui-content">
@@ -62,38 +66,15 @@
 					</div>
 				</li>
 			</ul>
-        </div>
-        <footer>
-        	<nav class="mui-bar mui-bar-tab">
-	         	<a class="mui-tab-item" href="../task/index.html">
-	         		<span class="mui-icon mui-icon-list"></span>
-	         		<span class="mui-tab-label">任务</span>
-	         	</a>
-	         	<a class="mui-tab-item mui-active" href="">
-	         		<span class="mui-icon mui-icon-compose"></span>
-	         		<span class="mui-tab-label">发布</span>
-	         	</a>
-	         	<a class="mui-tab-item" href="">
-	         		<span class="mui-icon mui-icon-gear"></span>
-	         		<span class="mui-tab-label">工作台</span>
-	         	</a>
-	         	<a class="mui-tab-item" href="">
-	         		<span class="mui-icon mui-icon-person"></span>
-	         		<span class="mui-tab-label">个人中心</span>
-	         	</a>
-         	</nav>
-        </footer>
+       </div>
 	</body>
 </html>
 <script src="../js/mui.min.js"></script>
 <!-- jquery -->
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
-	mui.plusReady(function() {
-		mui.init({
-			swipeBack: true
-		});
-					
+	mui.plusReady(function() {	
 		GetCurrentDateTime();
 		
 		$("#txtHandleTime").bind("tap", function() {
@@ -118,6 +99,7 @@
 		        maxDate: maxDate
 		    });
 		});
+		
 		$("#btnSave").bind("tap", function() {
 			var task = {};
 			task.Component = $("#txtComponent").val();
@@ -150,50 +132,13 @@
 			}
 
 			tasklist.push(task);
-			plus.storage.setItem("tasklist",JSON.stringify(tasklist));
+			//plus.storage.setItem("tasklist",JSON.stringify(tasklist));
 			
-			mui.openWindow({  
-			    url: "index.html",
-			    createNew:true,
-			    show: {  
-			        autoShow: true, //页面loaded事件发生后自动显示，默认为true  
-			    },  
-			    waiting: {  
-			        autoShow: true, //自动显示等待框，默认为true  
-			    }  
-			});
-		});
-		
-		//选项卡点击事件
-		mui('.mui-bar-tab').on('tap', 'a', function(e) {
-			var url = this.getAttribute('href');
-			if(url == "")
-			{
-				return;
-			}
-			
-			mui.openWindow({
-				url:url,
-				createNew:true,
-				show:{
-					autoShow: true
-				},
-				waiting:{
-					autoShow:true
-				}
-			});
+			openwindow("index.html",subpage_style)
 		});
 		
 		$("#startscan").bind("tap",function(){
-			mui.openWindow({
-				url:'../public/scanerweima.html',
-				show:{
-					autoShow: true
-				},
-				waiting:{
-					autoShow:true
-				}
-			});
+			openwindow("../public/scanerweima.html")
 		});
 		
 		$("#opencamera").bind("tap", function() {
