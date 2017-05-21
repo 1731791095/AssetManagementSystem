@@ -53,8 +53,6 @@
 <script type="text/javascript" src="js/iconfont.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
-	//当前窗口对象，即父窗口；
-	var self = plus.webview.currentWebview();
 	//当前激活选项
 	var activeTab = "map/index.html";
 
@@ -67,7 +65,7 @@
 				sub.hide();
 			}
 
-			self.append(sub);
+			plus.webview.currentWebview().append(sub);
 		});
 
 		//选项卡点击事件
