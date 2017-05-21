@@ -1,4 +1,4 @@
-var subStyles = {
+var subpage_style = {
 	top: '0px',
 	bottom: '51px'
 }
@@ -7,7 +7,7 @@ mui.plusReady(function() {
 	mui.init({
 		swipeBack: false
 	});
-
+	
 	$("#startscan").bind("tap", function() {
 		openwindow("../public/scanerweima.html")
 	});
