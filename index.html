@@ -49,12 +49,60 @@
 
 </html>
 <script src="js/mui.min.js"></script>
-<!-- jquery -->
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/iconfont.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
+	/*
+	 * 当前窗口对象，即父窗口；
+	 */
+	var self = plus.webview.currentWebview();
+	// 子窗口地址数组
+	var subpages = ["map/index.html", "task/index.html", "task/publish.html", "work/index.html", "my/index.html"];
+	// 子窗口样式
+	var subStyles = {
+		top: '0px',
+		bottom: '51px'
+	};
+
+	//创建子页面，首个选项卡页面显示，其它均隐藏；
 	mui.plusReady(function() {
-		openwindow("map/index.html", subpage_style);
+		var self = plus.webview.currentWebview();
+		for(var i = 0; i < subpages.length; i++) {
+			var temp = {};
+			var sub = plus.webview.create(subpages[i], subpages[i], subStyles);
+			if(i > 0) {
+				sub.hide();
+			} else {
+				temp[subpages[i]] = "true";
+				mui.extend(aniShow, temp);
+			}
+			self.append(sub);
+		}
+	});
+	
+	//当前激活选项
+	var activeTab = subpages[0];
+	var title = document.getElementById("title");
+	
+	//选项卡点击事件
+	mui('.mui-bar-tab').on('tap', 'a', function(e) {
+		var targetTab = this.getAttribute('href');
+		if(targetTab == activeTab) {
+			return;
+		}
+		
+		//显示目标选项卡
+		//若为iOS平台，则直接显示
+		if(mui.os.ios) {
+			plus.webview.show(targetTab);
+		} else {
+			plus.webview.show(targetTab, "fade-in", 300);
+		}
+		
+		//隐藏当前;
+		plus.webview.hide(activeTab);
+		//更改当前活跃的选项卡
+		activeTab = targetTab;
 	});
 </script>
