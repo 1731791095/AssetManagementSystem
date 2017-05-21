@@ -203,11 +203,7 @@
 					"css/iconfont.css"
 				],
 				"refer": [
-					"map/index.html",
-					"task/index.html",
-					"task/publish.html",
-					"work/index.html",
-					"my/index.html"
+					"map/index.html"
 				],
 				"priority": 0
 			},
@@ -222,7 +218,9 @@
 					"js/jquery-1.11.3.min.js"
 				],
 				"refer": [
-					"task/index.html"
+					"task/index.html",
+					"task/publish.html",
+					"workspace/index.html"
 				],
 				"priority": 0
 			},
@@ -257,9 +255,10 @@
 				],
 				"priority": 0
 			},
-			"my/index.html": {
+			"workspace/index.html": {
 				"resources": [
-					"images/cbd.jpg"
+					"fonts/mui-icons-extra.ttf",
+					"css/icons-extra.css"
 				],
 				"refer": [],
 				"priority": 0

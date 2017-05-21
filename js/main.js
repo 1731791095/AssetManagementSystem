@@ -31,7 +31,7 @@ mui.plusReady(function() {
 function openwindow(url, styles) {
 	mui.openWindow({
 		url: url,
-		createNew: true,
+		createNew: false,
 		show: {
 			autoShow: true
 		},
