@@ -71,6 +71,11 @@
 		//选项卡点击事件
 		mui('.mui-bar-tab').on('tap', 'a', function(e) {
 			var targetTab = this.getAttribute('href');
+			if(activeTab == targetTab)
+			{
+				return;
+			}
+			
 			var webview = plus.webview.getWebviewById(targetTab);
 			if(webview.id == null) {
 				var self = plus.webview.currentWebview();
@@ -78,11 +83,7 @@
 				self.append(sub);
 				return;
 			}
-
-			if(webview.isVisible()) {
-				return;
-			}
-
+			
 			//显示目标选项卡
 			//若为iOS平台，则直接显示
 			if(mui.os.ios) {
