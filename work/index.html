@@ -23,7 +23,7 @@
 			</div>
 			<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: white;">
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="../assets/index.html">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-icon_zichanxunshi"></use>
 						</svg>
@@ -31,7 +31,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-tongxunlu"></use>
 						</svg>
@@ -39,7 +39,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-wode"></use>
 						</svg>
@@ -47,7 +47,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-kongbai"></use>
 						</svg>
@@ -58,10 +58,10 @@
 			<div class="mui-input-row">
 				<label style="width: 100%;">其他应用</label>
 			</div>
-			
+
 			<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: white;">
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-wode"></use>
 						</svg>
@@ -69,7 +69,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-kongbai"></use>
 						</svg>
@@ -77,7 +77,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-kongbai"></use>
 						</svg>
@@ -85,7 +85,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<a href="#">
+					<a href="">
 						<svg class="mui-icon iconfont icon" aria-hidden="true">
 							<use xlink:href="#icon-kongbai"></use>
 						</svg>
@@ -103,4 +103,10 @@
 <script type="text/javascript" src="../js/iconfont.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		mui(".mui-table-view-cell").on('tap', 'a', function(e) {
+			var url = this.getAttribute('href');
+			openwindow(url);
+		});
+	});
 </script>
