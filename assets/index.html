@@ -25,24 +25,26 @@
 						<div class="mui-input-row mui-search">
 							<input type="search" class="mui-input-clear" placeholder="搜索">
 						</div>
+						<div class="mui-input-group" style="background-color: white;">
+							<div class="mui-input-row" style="border-bottom: 0px solid #eee;border-top: 0px  solid #eee;">
+								<label>资产类型：</label>
+								<input type="text" readonly="readonly" name="projectName" placeholder="搜索">
+							</div>
+							<div class="mui-input-row" style="border-bottom: 0px;border-top: 0px;">
+								<label>部件选择：</label>
+								<input type="text" readonly="readonly" name="projectName" placeholder="搜索">
+							</div>
+						</div>
 					</div>
 				</div>
-				<ul class="mui-table-view mui-grid-view" style="background-color: white;">
-					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-						资产类型：
-					</li>
-					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-						资产类型：
-					</li>
-				</ul>
-				<div class="mui-slider-group">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll" id="scroll">
-								<ul class="mui-table-view" id="assetslist">
-									<li class="mui-table-view-cell">
-										<div class="mui-button-row">
-											<button type="button" id="btnLoadData" class="mui-btn mui-btn-primary" style="width: 100%;">加载数据</button>
+				<div class="mui-slider-group ">
+					<div id="item1mobile " class="mui-slider-item mui-control-content mui-active ">
+						<div class="mui-scroll-wrapper ">
+							<div class="mui-scroll " id="scroll ">
+								<ul class="mui-table-view " id="assetslist ">
+									<li class="mui-table-view-cell ">
+										<div class="mui-button-row ">
+											<button type="button " id="btnLoadData " class="mui-btn mui-btn-primary " style="width: 100%; ">加载数据</button>
 										</div>
 									</li>
 								</ul>
@@ -55,11 +57,11 @@
 	</body>
 
 </html>
-<script src="../js/mui.min.js"></script>
-<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../js/iconfont.js"></script>
-<script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" charset="utf-8">
+<script src="../js/mui.min.js "></script>
+<script type="text/javascript " src="../js/jquery-1.11.3.min.js "></script>
+<script type="text/javascript " src="../js/iconfont.js "></script>
+<script type="text/javascript " src="../js/main.js "></script>
+<script type="text/javascript " charset="utf-8 ">
 	//阻尼系数
 	var deceleration = mui.os.ios ? 0.003 : 0.0009;
 	mui('.mui-scroll-wrapper').scroll({
