@@ -10,6 +10,7 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/iconfont.css" rel="stylesheet" />
 		<link href="../css/main.css" rel="stylesheet" />
+		<link href="../css/mui.picker.min.css" rel="stylesheet" />
 	</head>
 
 	<body>
@@ -28,13 +29,11 @@
 						<div class="mui-input-range" style="background-color: white;">
 							<div class="mui-input-row">
 								<label style="width: 30%;">资产类型：</label>
-								<input type="text" style="float: left; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly">
+								<input type="text" id="ddlAssertsType" style="float: left; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly" value="路面">
 							</div>
 							<div class="mui-input-row" style="padding-top: 5px;">
 								<label style="width: 30%;">部件选择：</label>
-								<input type="text" style="float:left; width: 19%; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly">
-								<input type="text" style="float:left; margin-left: 15px; margin-right: 15px; width: 19%; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly">
-								<input type="text" style="float:left; width: 19%; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly">
+								<input type="text" id="ddlComponent1" style="float:left; border-bottom: 1px solid #eee;border-left: 1px solid #eee;border-right: 1px solid #eee;border-top: 1px solid #eee;" readonly="readonly">
 							</div>
 						</div>
 					</div>
@@ -58,6 +57,7 @@
 <script type="text/javascript " src="../js/main.js "></script>
 <script src="../js/mui.pullToRefresh.js"></script>
 <script src="../js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="../js/mui.picker.min.js"></script>
 <script type="text/javascript " charset="utf-8 ">
 	mui.plusReady(function() {
 
@@ -68,7 +68,30 @@
 			indicators: true, //是否显示滚动条
 			deceleration: deceleration
 		});
-		
+
+		var ddlAssertsTypePicker = new mui.PopPicker();
+		ddlAssertsTypePicker.setData([{
+			value: '1',
+			text: '路面'
+		}, {
+			value: '2',
+			text: '路基'
+		}, {
+			value: '3',
+			text: '桥梁'
+		}, {
+			value: '4',
+			text: '涵洞'
+		}]);
+
+		var ddlAssertsTypePickerButton = $('#ddlAssertsType')[0];
+		var ddlAssertsType = $('#ddlAssertsType')[0];
+		ddlAssertsTypePickerButton.addEventListener('tap', function(event) {
+			ddlAssertsTypePicker.show(function(items) {
+				ddlAssertsType.value = items[0].text;
+			});
+		}, false);
+
 		getAssetsList();
 	});
 
@@ -179,12 +202,12 @@
 			if(jsontasklist.length == 0) {
 				plus.storage.removeItem("assetslist");
 				getAssetsList();
-				mui.toast("删除成功构件"+assetscode);
+				mui.toast("删除成功构件" + assetscode);
 				return;
 			}
 
 			plus.storage.setItem("assetslist", JSON.stringify(jsontasklist));
-			mui.toast("删除成功构件"+assetscode);
+			mui.toast("删除成功构件" + assetscode);
 		});
 	}
 </script>
