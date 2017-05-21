@@ -22,6 +22,10 @@ mui.plusReady(function() {
 			openwindow(url);
 		}
 	});
+	
+	$("#startscan").bind("tap",function(){
+		openwindow("../public/scanerweima.html")
+	});
 });
 
 function openwindow(url, styles) {

@@ -1,13 +1,14 @@
 @font-face {
 	font-family: "iconfont";
-	url('../fonts/iconfont.ttf?t=1495281625251') format('truetype')
+	src: url('../fonts/iconfont.ttf') format('truetype');
 }
 
 .iconfont {
 	font-family: "iconfont" !important;
-	font-size: 16px;
+	/*font-size: 16px;*/
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
 	-moz-osx-font-smoothing: grayscale;
 }
 
@@ -17,6 +18,10 @@
 
 .icon-saoyisao:before {
 	content: "\e610";
+}
+
+.icon-kongbai:before {
+	content: "\e60f";
 }
 
 .icon-shouye:before {
@@ -40,19 +45,19 @@
 }
 
 .icon-shuaxin1:before {
-	content: "\e60f";
+	content: "\e611";
 }
 
 .icon-gerentixing:before {
-	content: "\e611";
+	content: "\e612";
 }
 
 .icon-tianjia1:before {
 	content: "\e619";
 }
 
-.icon-rili:before {
-	content: "\e510";
+.icon-shoucang:before {
+	content: "\e508";
 }
 
 .icon-shouye1:before {
@@ -60,7 +65,7 @@
 }
 
 .icon-fabu:before {
-	content: "\e612";
+	content: "\e613";
 }
 
 .icon-tongxunlu-true:before {
@@ -71,12 +76,8 @@
 	content: "\e62f";
 }
 
-.icon-jichutubiao_userfuben:before {
-	content: "\e64e";
-}
-
 .icon-wenjian:before {
-	content: "\e613";
+	content: "\e614";
 }
 
 .icon-wode:before {
@@ -85,10 +86,6 @@
 
 .icon-tianjia2:before {
 	content: "\e67a";
-}
-
-.icon-saoyisao1:before {
-	content: "\e50a";
 }
 
 .icon-shezhi:before {
@@ -103,7 +100,7 @@
 	content: "\e506";
 }
 
-.icon-rili1:before {
+.icon-rili:before {
 	content: "\e762";
 }
 
@@ -111,12 +108,12 @@
 	content: "\e6d1";
 }
 
-.icon-gerenzhongxin1:before {
-	content: "\e715";
+.icon-wodeshoucang:before {
+	content: "\e662";
 }
 
-.icon-rili2:before {
-	content: "\e614";
+.icon-gerenzhongxin1:before {
+	content: "\e715";
 }
 
 .icon-xuanzetupian:before {
@@ -136,15 +133,15 @@
 }
 
 .icon-tianjia4:before {
-	content: "\e50b";
+	content: "\e50a";
 }
 
-.icon-saoyisao2:before {
-	content: "\e615";
-}
-
-.icon-saoyisao3:before {
+.icon-saoyisao1:before {
 	content: "\e63e";
+}
+
+.icon-shoucang1:before {
+	content: "\e567";
 }
 
 .icon-icon_zichanxunshishenqing:before {
@@ -156,29 +153,25 @@
 }
 
 .icon-wenjianjia:before {
-	content: "\e616";
+	content: "\e615";
 }
 
 .icon-wenjianjia1:before {
-	content: "\e617";
+	content: "\e616";
 }
 
 .icon-woguanlide:before {
-	content: "\e64f";
+	content: "\e64e";
 }
 
 .icon-fabu2:before {
 	content: "\e50d";
 }
 
-.icon-shoucang:before {
+.icon-shoucang2:before {
 	content: "\e61d";
 }
 
 .icon-shujuxiazai:before {
 	content: "\e6e7";
-}
-
-.icon-saoyisao4:before {
-	content: "\e502";
 }
