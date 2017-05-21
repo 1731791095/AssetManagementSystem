@@ -1,4 +1,4 @@
-var subpage_style = {
+var subStyles = {
 	top: '0px',
 	bottom: '51px'
 }
@@ -13,11 +13,12 @@ mui.plusReady(function() {
 	});
 });
 
-function openwindow(url, pageid, styles) {
+function openwindow(url, styles) {
+	var webviewid = GetWebviewId(url);
 	mui.openWindow({
 		url: url,
-		id: pageid,
-		createNew: false,
+		id: webviewid,
+		createNew: true,
 		show: {
 			autoShow: true
 		},
@@ -26,4 +27,10 @@ function openwindow(url, pageid, styles) {
 		},
 		styles: styles
 	});
+}
+
+function GetWebviewId(url) {
+	var startIndex = url.indexOf("/");
+	var webviewId = url.substring(startIndex + 1);
+	return webviewId;
 }
