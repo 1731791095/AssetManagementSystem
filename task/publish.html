@@ -1,179 +1,388 @@
 <!doctype html>
-<html>
+<html class="task-publish">
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <!-- mui -->
-        <link href="../css/mui.min.css" rel="stylesheet"/>
-        <link href="../css/iconfont.css" rel="stylesheet" />
-        <link href="../css/main.css" rel="stylesheet"/>
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/main.css" rel="stylesheet" />
+		<link href="../css/icons-extra.css" rel="stylesheet" />
+		<link href="../css/mui.picker.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.task-publish .mui-title-rightIcon {
+				float: right;
+				line-height: 3;
+				padding-right: 2px;
+			}
+			
+			.task-publish .question {
+				height: 100px;
+				margin-bottom: 0 !important;
+				padding-bottom: 0 !important;
+			}
+			
+			.task-publish .image-list {
+				width: 100%;
+				height: 85px;
+				background-size: cover;
+				padding: 10px 10px;
+				overflow: hidden;
+			}
+			
+			.task-publish .image-item {
+				width: 65px;
+				height: 65px;
+				/*background-image: url(../images/iconfont-tianjia.png);*/
+				background-size: 100% 100%;
+				display: inline-block;
+				position: relative;
+				border-radius: 5px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				border: solid 1px #e8e8e8;
+				vertical-align: top;
+			}
+			
+			.task-publish .image-item .file {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 0;
+			}
+			
+			.task-publish .image-item.space {
+				border: none;
+			}
+			
+			.task-publish .image-item .image-close {
+				position: absolute;
+				display: inline-block;
+				right: -6px;
+				top: -6px;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				border-radius: 12px;
+				background-color: #FF5053;
+				color: #f3f3f3;
+				border: solid 1px #FF5053;
+				font-size: 9px;
+				font-weight: 200;
+				z-index: 1;
+			}
+			
+			.task-publish .image-item .image-up {
+				height: 65px;
+				width: 65px;
+				border-radius: 10px;
+				line-height: 65px;
+				border: 1px solid #ccc;
+				color: #ccc;
+				display: inline-block;
+				text-align: center;
+			}
+			
+			.task-publish .image-item .image-up:after {
+				font-family: "微软雅黑";
+				content: '+';
+				font-size: 60px;
+			}
+			
+			.task-publish .image-item.space .image-close {
+				display: none;
+			}
+			
+			.mui-icon-star {
+				color: #B5B5B5;
+				font-size: 22px;
+			}
+			
+			.mui-icon-star-filled {
+				color: #FFB400;
+				font-size: 22px;
+			}
+		</style>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
-            <h1 class="mui-title">新建快速任务</h1>
-        </header>
-        <div class="mui-content">
-        	<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label id="lbldatetime" style="width: 100%;"></label>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>定位构件:</label>
-						<input type="text" id="txtComponent" class="mui-input-clear" placeholder="定位构件">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>任务名称:</label>
-						<input type="text" id="txtTaskName" class="mui-input-clear" placeholder="不能为空">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>任务描述:</label>
-						<input type="text" id="txtTaskDecription" class="mui-input-clear" placeholder="任务描述">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>处理人:</label>
-						<input type="text" id="txtHandlePerson" class="mui-input-clear" placeholder="不能为空">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>处理时间:</label>
-						<input type="datetime" id="txtHandleTime" placeholder="" readonly="readonly">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>现场照片:</label>
-						<img src="../images/prc.png" style="width: 80px;height: 80px;">
-						<svg class="icon mui-pull-right" style="font-size: 50px;" aria-hidden="true">
-							<use xlink:href="#icon-tianjia"></use>
-						</svg>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
+			<h1 class="mui-title">新建快速任务</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<label id="lbldatetime" style="width: 100%;"></label>
+				</div>
+				<div class="mui-input-row ">
+					<label>定位构件:</label>
+					<a id="mui-title-rightIcon" class="mui-title-rightIcon"><span class="mui-icon-extra mui-icon-extra-sweep"></span></a>
+					<input type="text" style="float: left;width: 55%;" id="txtComponent" readonly="readonly" class="mui-input-clear " placeholder="定位构件">
+
+				</div>
+				<div class="mui-input-row">
+					<label>任务名称:</label>
+					<input type="text" id="txtTaskName" class="mui-input-clear" placeholder="不能为空">
+				</div>
+				<div class="mui-input-row">
+					<label>任务描述:</label>
+
+					<!--					<input type="text" id="txtTaskDecription" class="mui-input-clear" placeholder="任务描述">-->
+				</div>
+				<div class="mui-input-row" style="height: 100px;">
+					<textarea id='txtTaskDescription' class="mui-input-clear question" placeholder="任务描述"></textarea>
+				</div>
+				<div class="mui-input-row">
+					<label>处理人:</label>
+					<input type="text" id="txtHandlePerson" class="mui-input-clear" placeholder="不能为空">
+				</div>
+
+				<div class="mui-input-row">
+					<label>处理时间:</label>
+					<input type="datetime" id="txtHandleTime" placeholder="" readonly="readonly">
+				</div>
+				<div class="mui-input-row">
+					<label>现场照片:</label>
+					<!--<svg class="icon mui-pull-right" style="font-size: 50px;" aria-hidden="true">
+						<use xlink:href="#icon-tianjia"></use>
+					</svg>-->
+				</div>
+				<div id='image-list' class="row image-list"></div>
+				<div class="mui-input-row">
 					<div class="mui-button-row">
-						<button type="button" id="btnSave" class="mui-btn mui-btn-primary" style="width: 100%;" >确定</button>
+						<button type="button" id="submit" class="mui-btn mui-btn-primary" style="width: 100%;">确定</button>
 					</div>
-				</li>
-			</ul>
-       </div>
+				</div>
+			</div>
+		</div>
 	</body>
+
 </html>
 <script src="../js/mui.min.js"></script>
 <!-- jquery -->
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/iconfont.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" charset="utf-8">
-	mui.plusReady(function() {	
-		GetCurrentDateTime();
-		
-		$("#txtHandleTime").bind("tap", function() {
-			var dDate = new Date();
-		    //设置当前日期（不设置默认当前日期）
-		    dDate.setFullYear(2016, 7, 16);
-		    var minDate = new Date();
-		    //最小时间
-		    minDate.setFullYear(2010, 0, 1);
-		    var maxDate = new Date();
-		    //最大时间
-		    maxDate.setFullYear(2016, 11, 31);
-		    plus.nativeUI.pickDate(function(e) {
-		        var d = e.date;
-		        $("#txtHandleTime").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
-		    }, function(e) {
-		        
-		    }, {
-		        title: '请选择日期',
-		        date:dDate,
-		        minDate: minDate,
-		        maxDate: maxDate
-		    });
-		});
-		
-		$("#btnSave").bind("tap", function() {
-			var task = {};
-			task.Component = $("#txtComponent").val();
-			task.TaskName = $("#txtTaskName").val();
-			task.TaskDecription = $("#txtTaskDecription").val();
-			task.HandlePerson = $("#txtHandlePerson").val();
-			task.HandleTime = $("#txtHandleTime").val();
-			
-			if(task.TaskName == "")
-			{
-				mui.alert("任务名称不能为空！");
-				return;
-			}
-			
-			if(task.HandlePerson == "")
-			{
-				mui.alert("处理人不能为空！");
-				return;
-			}
-			
-			var tasklist = new Array();
-			var hastasklist = plus.storage.getItem("tasklist");
-			if(hastasklist != null)
-			{
-				var jsontasklist=JSON.parse(hastasklist);
-				for(var index in jsontasklist)
-				{
-					tasklist.push(jsontasklist[index]);
-				}
-			}
+<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+<script type="text/javascript" src="../js/task-publish.js"></script>
 
-			tasklist.push(task);
-			//plus.storage.setItem("tasklist",JSON.stringify(tasklist));
-			
-			openwindow("index.html",subpage_style)
+<script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		 window.addEventListener('getComponentCode', function(e){
+        　          //获取参数值
+            var componentCode = e.detail.ComponentCode;
+            	mui.toast(componentCode);
+        });
+		$("#mui-title-rightIcon").bind("tap",function(){
+				openwindow("../public/scanerweima.html");
 		});
-		
-		$("#startscan").bind("tap",function(){
-			openwindow("../public/scanerweima.html")
-		});
-		
-		$("#opencamera").bind("tap", function() {
-			if (mui.os.plus) {
-				var a = [{
-					title: "拍照"
-				}, {
-					title: "从手机相册选择"
-				}];
-				plus.nativeUI.actionSheet({
-					cancel: "取消",
-					buttons: a
-				}, function(b) { /*actionSheet 按钮点击事件*/
-					switch (b.index) {
-						case 0:
-							break;
-						case 1:
-							//getImage(); /*拍照*/
-							break;
-						case 2:
-							//galleryImg();/*打开相册*/
-							break;
-						default:
-							break;
-					}
-				})
-			}
-		});
+		//		GetCurrentDateTime();
+		//		
+		//		$("#txtHandleTime").bind("tap", function() {
+		//			var dDate = new Date();
+		//		    //设置当前日期（不设置默认当前日期）
+		//		    dDate.setFullYear(2016, 7, 16);
+		//		    var minDate = new Date();
+		//		    //最小时间
+		//		    minDate.setFullYear(2010, 0, 1);
+		//		    var maxDate = new Date();
+		//		    //最大时间
+		//		    maxDate.setFullYear(2016, 11, 31);
+		//		    plus.nativeUI.pickDate(function(e) {
+		//		        var d = e.date;
+		//		        $("#txtHandleTime").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+		//		    }, function(e) {
+		//		        
+		//		    }, {
+		//		        title: '请选择日期',
+		//		        date:dDate,
+		//		        minDate: minDate,
+		//		        maxDate: maxDate
+		//		    });
+		//		});
+		//		
+		//		$("#btnSave").bind("tap", function() {
+		//			var task = {};
+		//			task.Component = $("#txtComponent").val();
+		//			task.TaskName = $("#txtTaskName").val();
+		//			task.TaskDecription = $("#txtTaskDecription").val();
+		//			task.HandlePerson = $("#txtHandlePerson").val();
+		//			task.HandleTime = $("#txtHandleTime").val();
+		//			
+		//			if(task.TaskName == "")
+		//			{
+		//				mui.alert("任务名称不能为空！");
+		//				return;
+		//			}
+		//			
+		//			if(task.HandlePerson == "")
+		//			{
+		//				mui.alert("处理人不能为空！");
+		//				return;
+		//			}
+		//			
+		//			var tasklist = new Array();
+		//			var hastasklist = plus.storage.getItem("tasklist");
+		//			if(hastasklist != null)
+		//			{
+		//				var jsontasklist=JSON.parse(hastasklist);
+		//				for(var index in jsontasklist)
+		//				{
+		//					tasklist.push(jsontasklist[index]);
+		//				}
+		//			}
+		//
+		//			tasklist.push(task);
+		//			//plus.storage.setItem("tasklist",JSON.stringify(tasklist));
+		//			
+		//			openwindow("index.html",subpage_style)
+		//		});
+		//		
+		//		$("#startscan").bind("tap",function(){
+		//			openwindow("../public/scanerweima.html")
+		//		});
+		//		
+		//		$("#opencamera").bind("tap", function() {
+		//			if (mui.os.plus) {
+		//				var a = [{
+		//					title: "拍照"
+		//				}, {
+		//					title: "从手机相册选择"
+		//				}];
+		//				plus.nativeUI.actionSheet({
+		//					cancel: "取消",
+		//					buttons: a
+		//				}, function(b) { /*actionSheet 按钮点击事件*/
+		//					switch (b.index) {
+		//						case 0:
+		//							break;
+		//						case 1:
+		//							//getImage(); /*拍照*/
+		//							break;
+		//						case 2:
+		//							//galleryImg();/*打开相册*/
+		//							break;
+		//						default:
+		//							break;
+		//					}
+		//				})
+		//			}
+		//		});
+
 	});
-	
-	function GetCurrentDateTime()
-	{
-		var arrday=["天", "一", "二", "三", "四", "五", "六"];
+	(function($, doc) {
+		$.init();
+		$.ready(function() {
+			/**
+			 * 获取对象属性的值
+			 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+			 * @param {Object} obj 对象
+			 * @param {String} param 属性名
+			 */
+			var _getParam = function(obj, param) {
+				return obj[param] || '';
+			};
+			//普通示例
+			var compoentPicker = new $.PopPicker();
+			compoentPicker.setData([{
+				value: '1',
+				text: '定位附件构建1'
+			}, {
+				value: '2',
+				text: '定位附件构建2'
+			}, {
+				value: '3',
+				text: '定位附件构建3'
+			}, {
+				value: '4',
+				text: '定位附件构建4'
+			}]);
+			var showUserPickerButton = $('#txtComponent')[0];
+			var txtComponent = $('#txtComponent')[0];
+			showUserPickerButton.addEventListener('tap', function(event) {
+				compoentPicker.show(function(items) {
+					txtComponent.value = items[0].text; //JSON.stringify(items[0]);
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+
+			var employeePicker = new $.PopPicker();
+			employeePicker.setData([{
+				value: '王小利',
+				text: '王小利'
+			}, {
+				value: '杜宜芳',
+				text: '杜宜芳'
+			}, {
+				value: '黄宗威',
+				text: '黄宗威'
+			}, {
+				value: '周敏',
+				text: '周敏'
+			}]);
+			var showEmployeePickerButton = $('#txtHandlePerson')[0];
+			var txtHandlePerson = $('#txtHandlePerson')[0];
+			showEmployeePickerButton.addEventListener('tap', function(event) {
+				employeePicker.show(function(items) {
+					txtHandlePerson.value = items[0].text; //JSON.stringify(items[0]);
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+
+		});
+
+		$("#txtHandleTime")[0].addEventListener('tap', function() {
+			var optionsJson = this.getAttribute('data-options') || '{}';
+			var options = JSON.parse(optionsJson);
+			var id = this.getAttribute('id');
+			/*
+			 * 首次显示时实例化组件
+			 * 示例为了简洁，将 options 放在了按钮的 dom 上
+			 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+			 */
+			var picker = new $.DtPicker(options);
+			picker.show(function(rs) {
+				/*
+				 * rs.value 拼合后的 value
+				 * rs.text 拼合后的 text
+				 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+				 * rs.m 月，用法同年
+				 * rs.d 日，用法同年
+				 * rs.h 时，用法同年
+				 * rs.i 分（minutes 的第二个字母），用法同年
+				 */
+				//result.innerText = '选择结果: ' + rs.text;
+				$("#txtHandleTime")[0].value = rs.text;
+				/* 
+				 * 返回 false 可以阻止选择框的关闭
+				 * return false;
+				 */
+				/*
+				 * 释放组件资源，释放后将将不能再操作组件
+				 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+				 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+				 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+				 */
+				picker.dispose();
+			});
+		}, false);
+	})(mui, document);
+
+	GetCurrentDateTime();
+
+	function GetCurrentDateTime() {
+		var arrday = ["天", "一", "二", "三", "四", "五", "六"];
 		var myDate = new Date();
-		$("#lbldatetime").text(myDate.getFullYear() +'年'+myDate.getMonth()+'月'+myDate.getDate()+'日   星期'+arrday[myDate.getDay()]);
+		$("#lbldatetime")[0].innerText = (myDate.getFullYear() + '年' + (myDate.getMonth() + 1) + '月' + myDate.getDate() + '日   星期' + arrday[myDate.getDay()]);
 	}
 </script>
