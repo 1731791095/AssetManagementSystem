@@ -42,6 +42,13 @@ body {
 	border-bottom: 0px solid #eee;
 }
 
+.table-text-cell {
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+
 .icon {
 	/* 通过设置 font-size 来改变图标大小 */
 	width: 1em;
@@ -80,3 +87,8 @@ body{font-family: "微软雅黑"; color:#282828 ;}
 .mui-bar-nav a,.mui-bar-nav h1{font-size: 27px;align-self: center; }
 .mui-media-body{font-family: "微软雅黑";font-size: 16px;}
 .mui-input-row{font-family: "微软雅黑";font-size: 15px;}
+}
+
+textarea {
+	border: solid 1px #BBBBBB !important;
+}
