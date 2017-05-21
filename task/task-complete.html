@@ -71,8 +71,20 @@
 				$('#endTime').val(getNow());
 
 				$('#btnComplete').on('tap', function() {
-					openwindow("index.html", subpage_style);
-					//plus.webview.load("index.html");
+					var webviewlist =plus.webview.all();
+					for(var index = 0;index < webviewlist.length;index++)
+					{
+						var webview = webviewlist[index];
+						if(webview.id == "HBuilder")
+						{
+							webview.hide();
+							continue;
+						}
+						
+						webview.close();
+					}
+					
+					openwindow("../index.html",null,{homepageid:"task/index.html"});
 				});
 
 				//timePickerFun();

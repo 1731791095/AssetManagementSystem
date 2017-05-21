@@ -7,13 +7,13 @@ mui.plusReady(function() {
 	mui.init({
 		swipeBack: false
 	});
-	
+
 	$("#startscan").bind("tap", function() {
 		openwindow("../public/scanerweima.html")
 	});
 });
 
-function openwindow(url, styles) {
+function openwindow(url, styles,extras) {
 	var webviewid = GetWebviewId(url);
 	mui.openWindow({
 		url: url,
@@ -25,7 +25,8 @@ function openwindow(url, styles) {
 		waiting: {
 			autoShow: true
 		},
-		styles: styles
+		styles: styles,
+		extras: extras
 	});
 }
 
