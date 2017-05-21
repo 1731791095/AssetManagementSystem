@@ -197,7 +197,10 @@
 					"js/jquery-1.11.3.min.js",
 					"css/main.css",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/main.js",
+					"js/iconfont.js",
+					"css/iconfont.css"
 				],
 				"refer": [
 					"map/index.html",
@@ -210,7 +213,13 @@
 			},
 			"map/index.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/main.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/main.js",
+					"js/jquery-1.11.3.min.js"
 				],
 				"refer": [
 					"task/index.html"
@@ -219,12 +228,23 @@
 			},
 			"task/index.html": {
 				"resources": [
-					"images/qiye.png"
+					"images/qiye.png",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/iconfont.ttf",
+					"js/main.js",
+					"js/jquery-1.11.3.min.js",
+					"css/main.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css"
 				],
 				"refer": [
 					"task/publish.html",
 					"public/scanerweima.html",
-					"map/index.html"
+					"map/index.html",
+					"task/task-action.html"
 				],
 				"priority": 0
 			},
@@ -242,6 +262,69 @@
 					"images/cbd.jpg"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"task/task-action.html": {
+				"resources": [
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/main.js",
+					"js/jquery-1.11.3.min.js",
+					"css/main.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/common.js"
+				],
+				"refer": [
+					"task/taskActionDetail.html"
+				],
+				"priority": 0
+			},
+			"task/taskActionDetail.html": {
+				"resources": [
+					"images/prc.png",
+					"css/main.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/main.js",
+					"js/jquery-1.11.3.min.js",
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"fonts/mui.ttf",
+					"js/iconfont.js"
+				],
+				"refer": [
+					"task/task-complete.html"
+				],
+				"priority": 0
+			},
+			"task/task-complete.html": {
+				"resources": [
+					"js/main.js",
+					"js/iconfont.js",
+					"css/main.css",
+					"js/mui.picker.min.js",
+					"js/jquery-1.11.3.min.js",
+					"fonts/mui.ttf",
+					"images/prc.png",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"js/common.js"
+				],
+				"refer": [
+					"task/index.html"
+				],
 				"priority": 0
 			}
 		},

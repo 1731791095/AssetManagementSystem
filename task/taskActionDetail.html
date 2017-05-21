@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/iconfont.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">巡查对象</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>巡查资产对象:</label>
+						<input type="text" readonly="readonly" class="mui-input-clear" name="asset" placeholder="巡查资产对象">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>病害类型:</label>
+						<input type="text" readonly="readonly" id="diseaseType" class="mui-input-clear" placeholder="病害类型">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>病害定位:</label>
+						<input type="text" id="disease" class="mui-input-clear" placeholder="病害定位">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>处置措施:</label>
+						<input type="text" id="handleStep" class="mui-input-clear" placeholder="处置措施">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>异常描述:</label>
+						<textarea  type="text" id="description" class="mui-input-clear" placeholder="异常描述">
+						</textarea>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<label>病害照片:</label>
+						<img src="../images/prc.png" style="width: 80px;height: 80px;">
+						<svg class="icon mui-pull-right" id="opencamera" style="font-size: 50px;" aria-hidden="true">
+							<use xlink:href="#icon-tianjia"></use>
+						</svg>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<button type="button" id="btnPrev" class="mui-btn mui-btn-primary" style="width: 100%;">上一条</button>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<button type="button" id="btnNext" class="mui-btn mui-btn-primary" style="width: 100%;">下一条</button>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row">
+						<button type="button" id="btnComplete" class="mui-btn mui-btn-primary" style="width: 100%;">完成</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="../js/iconfont.js"></script>
+		<script src="../js/main.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				assetPickerFun();
+				diseaseTypePickerFun();
+				pictureFun();
+				$('#btnComplete').on('tap',function(){
+					openwindow('task-complete.html');
+				});
+			});
+			function pictureFun(){
+				$("#opencamera").bind("tap", function() {
+			if (mui.os.plus) {
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: a
+				}, function(b) { /*actionSheet 按钮点击事件*/
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							//getImage(); /*拍照*/
+							break;
+						case 2:
+							//galleryImg();/*打开相册*/
+							break;
+						default:
+							break;
+					}
+				})
+			}
+		});
+			}
+			
+			function diseaseTypePickerFun(){
+				var diseaseTypePicker = new mui.PopPicker();
+				diseaseTypePicker.setData([{
+					value:'1',
+					text:'锈蚀'
+				},{
+					value:'2',
+					text:'破损'
+				}]);
+				$('#diseaseType').on('tap',function(){
+					var self = this;
+					diseaseTypePicker.show(function(items) {
+						$(self).val(items[0].text)
+					})
+				});
+			}
+			function assetPickerFun(){
+					var assetPicker = new mui.PopPicker();
+				assetPicker.setData([{
+					value:'1',
+					text:'钢箱梁'
+				},{
+					value:'2',
+					text:'斜拉索'
+				},{
+					value:'3',
+					text:'伸缩缝'
+				},{
+					value:'4',
+					text:'路基'
+				},{
+					value:'5',
+					text:'路面'
+				}]);
+				$('[name="asset"]').on('tap',function(){
+					var self = this;
+					assetPicker.show(function(items) {
+						$(self).val(items[0].text)
+					})
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-		<link href="../css/mui.picker.css" rel="stylesheet" />
 		<link href="../css/mui.poppicker.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/iconfont.css">
 		<link rel="stylesheet" href="../css/main.css">
@@ -53,7 +52,7 @@
 					<input type="text" readonly="readonly" class="mui-input-clear" name="level" style="width: 20%;">
 				</div>
 				<div class="mui-button-row">
-					<button type="button" class="mui-btn mui-btn-primary">完成</button>
+					<button type="button" id="btnComplete" class="mui-btn mui-btn-primary">完成</button>
 				</div>
 			</div>
 		</div>
@@ -61,7 +60,7 @@
 		<script src="../js/mui.picker.min.js"></script>
 		<script src="../js/jquery-1.11.3.min.js"></script>
 		<script src="../js/main.js"></script>
-		<script src="../js/mui.picker.js"></script>
+		<script src="../js/common.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
 		<script type="text/javascript">
 			mui.init();
@@ -124,26 +123,14 @@
 				$('[name="startTime"]').on('tap', function() {
 					showTime(picker);
 				});
-
+				
+				$('#btnComplete').on('tap',function(){
+					openwindow('taskActionDetail.html');
+				})
+				
 				setTitle(taskName);
 			});
-			var getNow = function() {
-				var today = new Date();
-				var dd = today.getDate();
-				var mm = today.getMonth() + 1; //一月是0，一定要注意
-				var yyyy = today.getFullYear();
-				var hour = today.getHours();
-				var minutes = today.getMinutes();
-				var seconds = today.getSeconds();
-				if(dd < 10) {
-					dd = '0' + dd
-				}
-				if(mm < 10) {
-					mm = '0' + mm
-				}
-				var today = yyyy + '-' + mm + '-' + dd + ' ' + hour + ': ' + minutes;
-				return today;
-			}
+			
 			var setTitle = function(title) {
 				document.querySelector('.mui-title').innerText = title;
 			}
