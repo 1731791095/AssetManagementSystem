@@ -31,17 +31,6 @@ body {
 	height: 100%;
 }
 
-.mui-grid-view.mui-grid-9 .mui-table-view-cell {
-	border-bottom: 0px solid #eee;
-}
-
-.table-text-cell {
-	border-bottom: 1px solid #eee;
-	border-left: 1px solid #eee;
-	border-right: 1px solid #eee;
-	border-top: 1px solid #eee;
-}
-
 .icon {
 	/* 通过设置 font-size 来改变图标大小 */
 	width: 1em;
