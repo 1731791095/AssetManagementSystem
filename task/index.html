@@ -198,27 +198,10 @@
 						waiting: {
 							autoShow: true
 						}
-					});
+					},subpage_style);
 				})
 
-				//选项卡点击事件
-				mui('.mui-bar-tab').on('tap', 'a', function(e) {
-					var url = this.getAttribute('href');
-					if(url == "") {
-						return;
-					}
-
-					mui.openWindow({
-						url: url,
-						createNew: true,
-						show: {
-							autoShow: true
-						},
-						waiting: {
-							autoShow: true
-						}
-					});
-				});
+				
 			});
 
 		});
