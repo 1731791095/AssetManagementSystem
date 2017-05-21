@@ -29,7 +29,7 @@
 			<a class="mui-tab-item" href="task/publish.html" pagetype="main">
 				<svg class="mui-icon iconfont icon" aria-hidden="true">
 					<use xlink:href="#icon-fabu2"></use>
-				</svg> 
+				</svg>
 				<span class="mui-tab-label">发布</span>
 			</a>
 			<a class="mui-tab-item" href="work/index.html" pagetype="main">
@@ -65,6 +65,11 @@
 		bottom: '51px'
 	};
 
+	//当前激活选项
+	var activeTab = subpages[0];
+
+	var aniShow = {};
+
 	//创建子页面，首个选项卡页面显示，其它均隐藏；
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
@@ -80,26 +85,25 @@
 			self.append(sub);
 		}
 	});
-	
-	//当前激活选项
-	var activeTab = subpages[0];
-	var title = document.getElementById("title");
-	
+
 	//选项卡点击事件
 	mui('.mui-bar-tab').on('tap', 'a', function(e) {
 		var targetTab = this.getAttribute('href');
 		if(targetTab == activeTab) {
 			return;
 		}
-		
+
 		//显示目标选项卡
 		//若为iOS平台，则直接显示
-		if(mui.os.ios) {
+		if(mui.os.ios || aniShow[targetTab]) {
 			plus.webview.show(targetTab);
 		} else {
+			var temp = {};
+			temp[targetTab] = "true";
+			mui.extend(aniShow, temp);
 			plus.webview.show(targetTab, "fade-in", 300);
 		}
-		
+
 		//隐藏当前;
 		plus.webview.hide(activeTab);
 		//更改当前活跃的选项卡
