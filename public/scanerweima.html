@@ -1,87 +1,93 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <!-- mui -->
-        <link href="../css/mui.min.css" rel="stylesheet"/>
-        <link href="../css/iconfont.css" rel="stylesheet" />
-        <link href="../css/main.css" rel="stylesheet"/>
-        <style>
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/main.css" rel="stylesheet" />
+		<style>
 			#divscanpanel {
-				height:610px;
-				width:100%;
+				height: 610px;
+				width: 100%;
 			}
-        </style>
+		</style>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
-            <a class="mui-action-back mui-icon mui-icon-back mui-pull-left menua" id="btnback"></a>
-            <h1 class="mui-title">扫一扫</h1>
-        </header>
-        <div class="mui-content">
-        	<div id= "divscanpanel"></div>
-        </div>
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left menua" id="btnback"></a>
+			<h1 class="mui-title">扫一扫</h1>
+		</header>
+		<div class="mui-content">
+			<div id="divscanpanel"></div>
+		</div>
 	</body>
+
 </html>
 <script src="../js/mui.min.js"></script>
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" charset="utf-8">
-			mui.plusReady(function() {
-					startRecognize();
-        			scan.start();
-        			
-					$("#opencamera").bind("tap", function() {
-						if (mui.os.plus) {
-							var a = [{
-								title: "拍照"
-							}, {
-								title: "从手机相册选择"
-							}];
-							plus.nativeUI.actionSheet({
-								cancel: "取消",
-								buttons: a
-							}, function(b) { /*actionSheet 按钮点击事件*/
-								switch (b.index) {
-									case 0:
-										break;
-									case 1:
-										//getImage(); /*拍照*/
-										break;
-									case 2:
-										//galleryImg();/*打开相册*/
-										break;
-									default:
-										break;
-								}
-							})
-						}
-					});
-				});
-				
-				var scan = null;
-			    var isOpen = false; // 闪光灯是否开始标志 true:闪光灯已经开启 false:闪光灯关闭
-			    // 条码识别成功事件
-			    function onmarked( type, result ) {
-			        var text = '未知: ';
-			        switch(type){
-			            case plus.barcode.QR:
-			            break;
-			            case plus.barcode.EAN13:
-			            text = 'EAN13: ';
-			            break;
-			            case plus.barcode.EAN8:
-			            text = 'EAN8: ';
-			            break;
-			        }
-			        
-			        mui.alert(result);
-			    }
-			    // 创建扫描控件
-			    function startRecognize() {
-			        scan = new plus.barcode.Barcode("divscanpanel");
-			        scan.onmarked = onmarked; 
-			    }
-        </script>
+	mui.plusReady(function() {
+		startRecognize();
+		scan.start();
+
+		$("#opencamera").bind("tap", function() {
+			if(mui.os.plus) {
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: a
+				}, function(b) { /*actionSheet 按钮点击事件*/
+					switch(b.index) {
+						case 0:
+							break;
+						case 1:
+							//getImage(); /*拍照*/
+							break;
+						case 2:
+							//galleryImg();/*打开相册*/
+							break;
+						default:
+							break;
+					}
+				})
+			}
+		});
+	});
+
+	var scan = null;
+	var isOpen = false; // 闪光灯是否开始标志 true:闪光灯已经开启 false:闪光灯关闭
+	// 条码识别成功事件
+	function onmarked(type, result) {
+		var text = '未知: ';
+		switch(type) {
+			case plus.barcode.QR:
+				break;
+			case plus.barcode.EAN13:
+				text = 'EAN13: ';
+				break;
+			case plus.barcode.EAN8:
+				text = 'EAN8: ';
+				break;
+		}
+		var view = plus.webview.currentWebview().opener();
+		mui.fire(view, 'getComponentCode', {
+			ComponentCode: result
+		});
+		mui.alert(result);
+	}
+	// 创建扫描控件
+	function startRecognize() {
+		scan = new plus.barcode.Barcode("divscanpanel");
+		scan.onmarked = onmarked;
+	}
+</script>
