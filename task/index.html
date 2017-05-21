@@ -1,319 +1,161 @@
 <!DOCTYPE html>
 <html>
-
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-		<link rel="stylesheet" href="../css/mui.min.css">
-		<link rel="stylesheet" href="../css/iconfont.css">
-		<link rel="stylesheet" href="../css/main.css">
-		<style>
-			html,
-			body {
-				background-color: #efeff4;
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+        <!-- mui -->
+        <link href="../css/mui.min.css" rel="stylesheet"/>
+        <link href="../css/main.css" rel="stylesheet"/>
+        <style>
+        	.userInfo {
+				background-color: white;
+				height: 120px;
+				width: 100%;
 			}
-			
-			.mui-bar~.mui-content .mui-fullscreen {
-				top: 44px;
-				height: auto;
-			}
-			
-			.mui-pull-top-tips {
-				position: absolute;
-				top: -20px;
-				left: 50%;
-				margin-left: -25px;
-				width: 40px;
-				height: 40px;
-				border-radius: 100%;
-				z-index: 1;
-			}
-			
-			.mui-bar~.mui-pull-top-tips {
-				top: 24px;
-			}
-			
-			.mui-pull-top-wrapper {
-				width: 42px;
-				height: 42px;
-				display: block;
-				text-align: center;
-				background-color: #efeff4;
-				border: 1px solid #ddd;
-				border-radius: 25px;
-				background-clip: padding-box;
-				box-shadow: 0 4px 10px #bbb;
-				overflow: hidden;
-			}
-			
-			.mui-pull-top-tips.mui-transitioning {
-				-webkit-transition-duration: 200ms;
-				transition-duration: 200ms;
-			}
-			
-			.mui-pull-top-tips .mui-pull-loading {
-				/*-webkit-backface-visibility: hidden;
-				-webkit-transition-duration: 400ms;
-				transition-duration: 400ms;*/
-				margin: 0;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon,
-			.mui-pull-top-wrapper .mui-spinner {
-				margin-top: 7px;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon.mui-reverse {
-				/*-webkit-transform: rotate(180deg) translateZ(0);*/
-			}
-			
-			.mui-pull-bottom-tips {
-				text-align: center;
-				background-color: #efeff4;
-				font-size: 15px;
-				line-height: 40px;
-				color: #777;
-			}
-			
-			.mui-pull-top-canvas {
-				overflow: hidden;
-				background-color: #fafafa;
-				border-radius: 40px;
-				box-shadow: 0 4px 10px #bbb;
-				width: 40px;
-				height: 40px;
-				margin: 0 auto;
-			}
-			
-			.mui-pull-top-canvas canvas {
-				width: 40px;
-			}
-			
-			.mui-slider-indicator.mui-segmented-control {
-				background-color: #efeff4;
-			}
-		</style>
-	</head>
-
-	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon iconfont icon-rili mui-pull-left"></a>
-			<h1 class="mui-title">我的任务</h1>
-			<a id="startscan" class="mui-icon iconfont icon-saoyisao1 mui-pull-right"></a>
-		</header>
-		<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div style="background-color: white;border-bottom: 1px solid #eee;">
-					<div style="margin-left:8px;margin-right:8px;padding-top: 10px;padding-bottom: 10px;">
-						<div class="mui-input-row mui-search">
-							<input type="search" class="mui-input-clear" placeholder="搜索">
-						</div>
-						<div id="sliderSegmentedControl" class="mui-segmented-control">
-							<a class="mui-control-item mui-active" href="1">新任务</a>
-							<a class="mui-control-item" href="2">正在执行</a>
-							<a class="mui-control-item" href="3">已完成</a>
-						</div>
+        </style>
+    </head>
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-home mui-pull-left menua" id="gohome"></a>
+            <a class="mui-icon mui-icon-settings mui-pull-right adda" id="startscan"></a>
+            <h1 class="mui-title">我的任务</h1>
+        </header>
+        <div class="mui-content">
+        	<div class="userInfo">
+        		<div style="margin: 8px 8px;padding-top: 10px;">
+	        		<div class="mui-input-row mui-search">
+		    			<input type="search" class="mui-input-clear" placeholder="搜索">
+					</div>
+					<div id="taskselect" class="mui-segmented-control">
+						<a class="mui-control-item mui-active" href="1">
+							新任务
+						</a>
+						<a class="mui-control-item" href="2">
+							正在执行
+						</a>
+						<a class="mui-control-item" href="3">
+					  		已完成
+						</a>
 					</div>
 				</div>
-				<div class="mui-slider-group">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div class="mui-scroll-wrapper">
-							<div class="mui-scroll" id="scroll">
-								<ul class="mui-table-view" id="tasklist">
-
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+        	</div>
+			<ul class="mui-table-view" id="tasklist">
+			    <li class="mui-table-view-cell mui-media">
+			        <a href="javascript:;">
+			            <img class="mui-media-object mui-pull-left" src="../images/qiye.png">
+			            <div class="mui-media-body">
+			                幸福
+			                <p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+			            </div>
+			        </a>
+			    </li>
+			</ul>
 		</div>
-	</body>
+		<footer>
+        	<nav class="mui-bar mui-bar-tab">
+	         	<a class="mui-tab-item mui-active" href="">
+	         		<span class="mui-icon mui-icon-list"></span>
+	         		<span class="mui-tab-label">任务</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="../task/publish.html">
+	         		<span class="mui-icon mui-icon-compose"></span>
+	         		<span class="mui-tab-label">发布</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="../workspace/index.html">
+	         		<span class="mui-icon mui-icon-gear"></span>
+	         		<span class="mui-tab-label">工作台</span>
+	         	</a>
+	         	<a class="mui-tab-item" href="">
+	         		<span class="mui-icon mui-icon-person"></span>
+	         		<span class="mui-tab-label">个人中心</span>
+	         	</a>
+         	</nav>
+        </footer>
+    </body>
 </html>
 <script src="../js/mui.min.js"></script>
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/mui.pullToRefresh.js"></script>
-<script src="../js/mui.pullToRefresh.material.js"></script>
-<script>
-	(function(mui) {
-		//阻尼系数
-		var deceleration = mui.os.ios ? 0.003 : 0.0009;
-		mui('.mui-scroll-wrapper').scroll({
-			bounce: false,
-			indicators: true, //是否显示滚动条
-			deceleration: deceleration
+<!-- jquery -->
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		mui.init({
+			swipeBack: true
 		});
-
-		mui.plusReady(function() {
-			setTaskList();
-
-			mui.ready(function() {
-				//循环初始化所有下拉刷新，上拉加载。
-				var mui_scroll = mui('.mui-slider-group .mui-scroll');
-
-				var refreshApi = mui_scroll.pullToRefresh({
-					down: {
-						callback: function() {
-							var self = this;
-							getTaskList(true, function() {
-								self.endPullDownToRefresh();
-							})
-						}
-					},
-					up: {
-						auto: true,
-						callback: function() {
-							var self = this;
-							getTaskList(false, function() {
-								self.endPullUpToRefresh();
-							})
-						}
-					}
-				});
-
-				mui('#sliderSegmentedControl').on('tap', '.mui-control-item', function() {
-					clearTaskList();
-					refreshApi.pullUpLoading();
-				});
-
-				mui('#tasklist').on('tap', 'a', function(e) {
-					var url = this.getAttribute('href');
-					if(url == "") {
-						return;
-					}
-					var taskName = this.getAttribute('data-taskName');
-					mui.openWindow({
-						url: url,
-						createNew: true,
-						show: {
-							autoShow: true
-						},
-						extras: {
-							taskName: taskName
-						},
-						waiting: {
-							autoShow: true
-						}
-					});
-				})
-
-				//选项卡点击事件
-				mui('.mui-bar-tab').on('tap', 'a', function(e) {
-					var url = this.getAttribute('href');
-					if(url == "") {
-						return;
-					}
-
-					mui.openWindow({
-						url: url,
-						createNew: true,
-						show: {
-							autoShow: true
-						},
-						waiting: {
-							autoShow: true
-						}
-					});
-				});
-			});
-
+					
+		$("#taskselect .mui-control-item").bind("tap", function() {
+			//mui.alert(this.getAttribute('href'));
 		});
-
-		var createFragment = function(ul, index, count, reverse) {
-			var length = ul.querySelectorAll('li').length;
-			var fragment = document.createDocumentFragment();
-			var li;
-			for(var i = 0; i < count; i++) {
-				li = document.createElement('li');
-				li.className = 'mui-table-view-cell';
-				li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
-				fragment.appendChild(li);
-			}
-			return fragment;
-		};
-
-		function setTaskList() {
-			var taskList = new Array();
-			taskList.push({
-				TaskName: '2017年4月1日日巡查',
-				TaskDecription: '检查资产：路面、路基、钢箱梁……',
-				TaskImage: '../images/qiye.png',
-				TaskState: 1
-			});
-			taskList.push({
-				TaskName: '2017年4月1日日巡查',
-				TaskDecription: '检查资产：北引桥左幅第1联主梁、……',
-				TaskImage: '../images/qiye.png',
-				TaskState: 1
-			})
-			taskList.push({
-				TaskName: '2016年10月22日钢箱梁内部外观…',
-				TaskDecription: '检查资产：钢箱梁',
-				TaskImage: '../images/qiye.png',
-				TaskState: 1
-			})
-			taskList.push({
-				TaskName: '2016年10月22日斜拉索索力',
-				TaskDecription: '检查资产：斜拉索',
-				TaskImage: '../images/qiye.png',
-				TaskState: 1
-			})
-
-			var item = JSON.stringify(taskList);
-			plus.storage.setItem('tasklist', item)
-		}
-
-		function clearTaskList() {
-			var $taskList = $("#tasklist");
-			if(!$taskList) {
-				return;
-			}
-			$taskList.empty();
-		}
-
-		function getTaskList(isDown, callBack) {
-
-			var taskStateA = $('#sliderSegmentedControl .mui-active');
-			if(!taskStateA) {
-				return;
-			}
-			var state = taskStateA.attr('href');
-
-			var $taskList = $("#tasklist");
-			if(!$taskList) {
-				return;
-			}
-			if(isDown) {
-				$taskList.empty();
-			}
-
-			setTimeout(function() {
-				var tasklist = plus.storage.getItem("tasklist");
-
-				if(tasklist == null) {
-					return;
+					
+		$("#gohome").bind("tap",function(){
+			mui.openWindow({
+				url:'../map/index.html',
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
 				}
-				var jsontasklist = JSON.parse(tasklist);
-				jsontasklist.forEach(function(item, key, list) {
-					var li = '<li class="mui-table-view-cell mui-media">' +
-						'<a href="task-action.html" data-taskName="' + item.TaskName + '">' +
-						'<img class="mui-media-object mui-pull-left" src="' + item.TaskImage + '">' +
-						'<div class="mui-media-body">' +
-						item.TaskName +
-						'<p class="mui-ellipsis">' + item.TaskDecription + '</p>' +
-						'</div>' +
-						'</a>' +
-						'</li>';
-					$taskList.append($(li));
-				});
-				callBack && callBack();
-			}, 1000)
-
+			});
+		});
+		
+		$("#startscan").bind("tap",function(){
+			mui.openWindow({
+				url:'../public/scanerweima.html',
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
+				}
+			});
+		});
+		
+		//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+			var url = this.getAttribute('href');
+			if(url == "")
+			{
+				return;
+			}
+			
+			mui.openWindow({
+				url:url,
+				createNew:true,
+				show:{
+					autoShow: true
+				},
+				waiting:{
+					autoShow:true
+				}
+			});
+		});
+		
+		getTaskList();
+	});
+	
+	function getTaskList()
+	{
+		var tasklist = plus.storage.getItem("tasklist");
+		if(tasklist == null)
+		{
+			return;
 		}
 
-	})(mui);
+		var content = "";
+		var jsontasklist=JSON.parse(tasklist);
+		for(var index in jsontasklist)
+		{
+			content += "<li class=\"mui-table-view-cell mui-media\">";
+			content += "<a href=\"javascript:;\">";
+			content += "<img class=\"mui-media-object mui-pull-left\" src=\"../images/qiye.png\">";
+			content += "<div class=\"mui-media-body\">";
+			content += jsontasklist[index].TaskName;
+			content += "<p class=\"mui-ellipsis\">"+jsontasklist[index].TaskDecription+"</p>"
+			content += "</div>";
+			content += "</a>";
+			content += "</li>";
+		}
+		
+		$("#tasklist").html(content);
+	}
 </script>

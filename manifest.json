@@ -209,7 +209,9 @@
 					"fonts/mui.ttf"
 				],
 				"refer": [
-					"task/index.html"
+					"task/index.html",
+					"task/publish.html",
+					"workspace/index.html"
 				],
 				"priority": 0
 			},
@@ -231,6 +233,14 @@
 				"refer": [
 					"task/index.html"
 				],
+				"priority": 0
+			},
+			"workspace/index.html": {
+				"resources": [
+					"fonts/mui-icons-extra.ttf",
+					"css/icons-extra.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
