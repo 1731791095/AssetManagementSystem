@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="task-publish">
 
 	<head>
 		<meta charset="UTF-8">
@@ -10,6 +10,103 @@
 		<link href="../css/mui.poppicker.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/iconfont.css">
 		<link rel="stylesheet" href="../css/main.css">
+		<style>
+			.task-publish .question {
+				height: 100px;
+				margin-bottom: 0 !important;
+				padding-bottom: 0 !important;
+			}
+			
+			.task-publish .image-list {
+				width: 100%;
+				height: 85px;
+				background-size: cover;
+				padding: 10px 10px;
+				overflow: hidden;
+			}
+			
+			.task-publish .image-item {
+				width: 65px;
+				height: 65px;
+				/*background-image: url(../images/iconfont-tianjia.png);*/
+				background-size: 100% 100%;
+				display: inline-block;
+				position: relative;
+				border-radius: 5px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				border: solid 1px #e8e8e8;
+				vertical-align: top;
+			}
+			
+			.task-publish .image-item .file {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 0;
+			}
+			
+			.task-publish .image-item.space {
+				border: none;
+			}
+			
+			.task-publish .image-item .image-close {
+				position: absolute;
+				display: inline-block;
+				right: -6px;
+				top: -6px;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				border-radius: 12px;
+				background-color: #FF5053;
+				color: #f3f3f3;
+				border: solid 1px #FF5053;
+				font-size: 9px;
+				font-weight: 200;
+				z-index: 1;
+			}
+			
+			.task-publish .image-item .image-up {
+				height: 65px;
+				width: 65px;
+				border-radius: 10px;
+				line-height: 65px;
+				border: 1px solid #ccc;
+				color: #ccc;
+				display: inline-block;
+				text-align: center;
+			}
+			
+			.task-publish .image-item .image-up:after {
+				font-family: "微软雅黑";
+				content: '+';
+				font-size: 60px;
+			}
+			
+			.task-publish .image-item.space .image-close {
+				display: none;
+			}
+			
+			.mui-icon-star {
+				color: #B5B5B5;
+				font-size: 22px;
+			}
+			
+			.mui-icon-star-filled {
+				color: #FFB400;
+				font-size: 22px;
+			}
+			
+			.mui-input-range .mui-input-row {
+				border-top: solid 1px #eee;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,66 +114,53 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">巡查对象</h1>
 		</header>
-		<div class="mui-content">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>巡查资产对象:</label>
-						<input type="text" readonly="readonly" class="mui-input-clear" name="asset" placeholder="巡查资产对象">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>病害类型:</label>
-						<input type="text" readonly="readonly" id="diseaseType" class="mui-input-clear" placeholder="病害类型">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>病害定位:</label>
-						<input type="text" id="disease" class="mui-input-clear" placeholder="病害定位">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>处置措施:</label>
-						<input type="text" id="handleStep" class="mui-input-clear" placeholder="处置措施">
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>异常描述:</label>
-						<textarea  type="text" id="description" class="mui-input-clear" placeholder="异常描述">
-						</textarea>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
-						<label>病害照片:</label>
-						<img src="../images/prc.png" style="width: 80px;height: 80px;">
-						<svg class="icon mui-pull-right" id="opencamera" style="font-size: 50px;" aria-hidden="true">
-							<use xlink:href="#icon-tianjia"></use>
-						</svg>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
+		<div class="mui-content" style="background-color: white;">
+			<div class="mui-input-range">
+				<div class="mui-input-row">
+					<label>巡查资产对象:</label>
+					<input type="text" readonly="readonly" class="mui-input-clear" name="asset" placeholder="巡查资产对象">
+				</div>
+				<div class="mui-input-row">
+					<label>病害类型:</label>
+					<input type="text" readonly="readonly" id="diseaseType" class="mui-input-clear" placeholder="病害类型">
+				</div>
+
+				<div class="mui-input-row">
+					<label>病害定位:</label>
+					<input type="text" id="disease" class="mui-input-clear" placeholder="病害定位">
+				</div>
+
+				<div class="mui-input-row">
+					<label>处置措施:</label>
+					<input type="text" id="handleStep" class="mui-input-clear" placeholder="处置措施">
+				</div>
+
+				<div class="mui-input-row" style="height: 110px; ">
+					<label>异常描述:</label>
+					<textarea id='txtDescription' class="mui-input-clear question" style="width: 63%;float: left;" placeholder="异常描述"></textarea>
+				</div>
+
+				<div class="mui-input-row">
+					<label>病害照片:</label>
+				</div>
+				<!--<div id='image-list' class="row image-list"></div>-->
+				<div class="mui-input-row">
+					<div class="mui-button-row">
 						<button type="button" id="btnPrev" class="mui-btn mui-btn-primary" style="width: 100%;">上一条</button>
 					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
+				</div>
+				<div class="mui-input-row">
+					<div class="mui-button-row">
 						<button type="button" id="btnNext" class="mui-btn mui-btn-primary" style="width: 100%;">下一条</button>
 					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-input-row">
+				</div>
+				<div class="mui-input-row">
+					<div class="mui-button-row">
 						<button type="button" id="btnComplete" class="mui-btn mui-btn-primary" style="width: 100%;">完成</button>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</div>
-
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/mui.picker.min.js"></script>
 		<script src="../js/jquery-1.11.3.min.js"></script>
@@ -89,74 +173,76 @@
 				assetPickerFun();
 				diseaseTypePickerFun();
 				pictureFun();
-				$('#btnComplete').on('tap',function(){
+				$('#btnComplete').on('tap', function() {
 					openwindow('task-complete.html');
 				});
 			});
-			function pictureFun(){
+
+			function pictureFun() {
 				$("#opencamera").bind("tap", function() {
-			if (mui.os.plus) {
-				var a = [{
-					title: "拍照"
-				}, {
-					title: "从手机相册选择"
-				}];
-				plus.nativeUI.actionSheet({
-					cancel: "取消",
-					buttons: a
-				}, function(b) { /*actionSheet 按钮点击事件*/
-					switch (b.index) {
-						case 0:
-							break;
-						case 1:
-							//getImage(); /*拍照*/
-							break;
-						case 2:
-							//galleryImg();/*打开相册*/
-							break;
-						default:
-							break;
+					if(mui.os.plus) {
+						var a = [{
+							title: "拍照"
+						}, {
+							title: "从手机相册选择"
+						}];
+						plus.nativeUI.actionSheet({
+							cancel: "取消",
+							buttons: a
+						}, function(b) { /*actionSheet 按钮点击事件*/
+							switch(b.index) {
+								case 0:
+									break;
+								case 1:
+									//getImage(); /*拍照*/
+									break;
+								case 2:
+									//galleryImg();/*打开相册*/
+									break;
+								default:
+									break;
+							}
+						})
 					}
-				})
+				});
 			}
-		});
-			}
-			
-			function diseaseTypePickerFun(){
+
+			function diseaseTypePickerFun() {
 				var diseaseTypePicker = new mui.PopPicker();
 				diseaseTypePicker.setData([{
-					value:'1',
-					text:'锈蚀'
-				},{
-					value:'2',
-					text:'破损'
+					value: '1',
+					text: '锈蚀'
+				}, {
+					value: '2',
+					text: '破损'
 				}]);
-				$('#diseaseType').on('tap',function(){
+				$('#diseaseType').on('tap', function() {
 					var self = this;
 					diseaseTypePicker.show(function(items) {
 						$(self).val(items[0].text)
 					})
 				});
 			}
-			function assetPickerFun(){
-					var assetPicker = new mui.PopPicker();
+
+			function assetPickerFun() {
+				var assetPicker = new mui.PopPicker();
 				assetPicker.setData([{
-					value:'1',
-					text:'钢箱梁'
-				},{
-					value:'2',
-					text:'斜拉索'
-				},{
-					value:'3',
-					text:'伸缩缝'
-				},{
-					value:'4',
-					text:'路基'
-				},{
-					value:'5',
-					text:'路面'
+					value: '1',
+					text: '钢箱梁'
+				}, {
+					value: '2',
+					text: '斜拉索'
+				}, {
+					value: '3',
+					text: '伸缩缝'
+				}, {
+					value: '4',
+					text: '路基'
+				}, {
+					value: '5',
+					text: '路面'
 				}]);
-				$('[name="asset"]').on('tap',function(){
+				$('[name="asset"]').on('tap', function() {
 					var self = this;
 					assetPicker.show(function(items) {
 						$(self).val(items[0].text)

@@ -79,5 +79,6 @@ body{font-family: "微软雅黑"; color:#282828 ;}
 }
 
 textarea {
-	border: solid 1px #BBBBBB !important;
+	border: solid 1px #eee !important;
+	margin-top: 5px;
 }
