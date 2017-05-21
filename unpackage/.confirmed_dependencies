@@ -10,7 +10,10 @@
 		],
 		"refer": [
 			"map/index.html",
-			"task/index.html"
+			"task/index.html",
+			"task/publish.html",
+			"work/index.html",
+			"my/index.html"
 		]
 	},
 	"map/index.html": {
@@ -66,6 +69,11 @@
 			"css/mui.picker.min.css",
 			"js/mui.poppicker.js",
 			"css/mui.poppicker.css"
+		]
+	},
+	"my/index.html": {
+		"resources": [
+			"images/cbd.jpg"
 		]
 	}
 }

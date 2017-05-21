@@ -203,7 +203,10 @@
 				],
 				"refer": [
 					"map/index.html",
-					"task/index.html"
+					"task/index.html",
+					"task/publish.html",
+					"work/index.html",
+					"my/index.html"
 				],
 				"priority": 0
 			},
@@ -257,6 +260,13 @@
 					"js/mui.poppicker.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/index.html": {
+				"resources": [
+					"images/cbd.jpg"
 				],
 				"refer": [],
 				"priority": 0
