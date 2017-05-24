@@ -56,13 +56,16 @@
 	//当前激活选项
 	var activeTab = "map/index.html";
 
-	var homepageid = plus.webview.currentWebview().homepageid;
-	if(homepageid != null) {
-		activeTab = homepageid;
-	}
+	
 
 	//创建子页面，首个选项卡页面显示，其它均隐藏；
 	mui.plusReady(function() {
+		
+		var homepageid = plus.webview.currentWebview().homepageid;
+	if(homepageid != null) {
+		activeTab = homepageid;
+	}
+		
 		$('.mui-bar-tab a').each(function() {
 			var targetTab = this.getAttribute('href');
 			var sub = plus.webview.create(targetTab, targetTab, subpage_style);
