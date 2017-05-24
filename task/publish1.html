@@ -110,10 +110,6 @@
 				color: #FFB400;
 				font-size: 22px;
 			}
-			
-			.mui-input-range .mui-input-row {
-				border-top: solid 1px #eee;
-			}
 		</style>
 	</head>
 
@@ -122,33 +118,42 @@
 			<h1 class="mui-title">新建快速任务</h1>
 		</header>
 		<div class="mui-content">
-			<div class="mui-input-range" style="background-color: white;">
+			<div class="mui-input-group">
 				<div class="mui-input-row">
 					<label id="lbldatetime" style="width: 100%;"></label>
 				</div>
 				<div class="mui-input-row ">
 					<label>定位构件:</label>
 					<a id="mui-title-rightIcon" class="mui-title-rightIcon"><span class="mui-icon-extra mui-icon-extra-sweep"></span></a>
-					<input type="text" style="float: left;width: 55%;" id="txtComponent" readonly="readonly" class="mui-input-clear " placeholder="" value="定位附件构建1">
+					<input type="text" style="float: left;width: 55%;" id="txtComponent" readonly="readonly" class="mui-input-clear " placeholder="定位构件">
+
 				</div>
 				<div class="mui-input-row">
 					<label>任务名称:</label>
 					<input type="text" id="txtTaskName" class="mui-input-clear" placeholder="不能为空">
 				</div>
-				<div class="mui-input-row" style="height: 110px; ">
+				<div class="mui-input-row">
 					<label>任务描述:</label>
-					<textarea id='txtTaskDescription' class="mui-input-clear question" style="width: 63%;float: left;" placeholder="任务描述"></textarea>
+
+					<!--					<input type="text" id="txtTaskDecription" class="mui-input-clear" placeholder="任务描述">-->
+				</div>
+				<div class="mui-input-row" style="height: 100px;">
+					<textarea id='txtTaskDescription' class="mui-input-clear question" placeholder="任务描述"></textarea>
 				</div>
 				<div class="mui-input-row">
-					<label>处理人员:</label>
+					<label>处理人:</label>
 					<input type="text" id="txtHandlePerson" class="mui-input-clear" placeholder="不能为空">
 				</div>
+
 				<div class="mui-input-row">
 					<label>处理时间:</label>
 					<input type="datetime" id="txtHandleTime" placeholder="" readonly="readonly">
 				</div>
 				<div class="mui-input-row">
 					<label>现场照片:</label>
+					<!--<svg class="icon mui-pull-right" style="font-size: 50px;" aria-hidden="true">
+						<use xlink:href="#icon-tianjia"></use>
+					</svg>-->
 				</div>
 				<div id='image-list' class="row image-list"></div>
 				<div class="mui-input-row">
@@ -171,14 +176,80 @@
 
 <script type="text/javascript" charset="utf-8">
 	mui.plusReady(function() {
-		window.addEventListener('getComponentCode', function(e) {　 //获取参数值
-			var componentCode = e.detail.ComponentCode;
-			mui.toast(componentCode);
+		 window.addEventListener('getComponentCode', function(e){
+        　          //获取参数值
+            var componentCode = e.detail.ComponentCode;
+            	mui.toast(componentCode);
+        });
+		$("#mui-title-rightIcon").bind("tap",function(){
+				openwindow("../public/scanerweima.html");
 		});
-		$("#mui-title-rightIcon").bind("tap", function() {
-			openwindow("../public/scanerweima.html");
-		});
-
+		//		GetCurrentDateTime();
+		//		
+		//		$("#txtHandleTime").bind("tap", function() {
+		//			var dDate = new Date();
+		//		    //设置当前日期（不设置默认当前日期）
+		//		    dDate.setFullYear(2016, 7, 16);
+		//		    var minDate = new Date();
+		//		    //最小时间
+		//		    minDate.setFullYear(2010, 0, 1);
+		//		    var maxDate = new Date();
+		//		    //最大时间
+		//		    maxDate.setFullYear(2016, 11, 31);
+		//		    plus.nativeUI.pickDate(function(e) {
+		//		        var d = e.date;
+		//		        $("#txtHandleTime").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+		//		    }, function(e) {
+		//		        
+		//		    }, {
+		//		        title: '请选择日期',
+		//		        date:dDate,
+		//		        minDate: minDate,
+		//		        maxDate: maxDate
+		//		    });
+		//		});
+		//		
+		//		$("#btnSave").bind("tap", function() {
+		//			var task = {};
+		//			task.Component = $("#txtComponent").val();
+		//			task.TaskName = $("#txtTaskName").val();
+		//			task.TaskDecription = $("#txtTaskDecription").val();
+		//			task.HandlePerson = $("#txtHandlePerson").val();
+		//			task.HandleTime = $("#txtHandleTime").val();
+		//			
+		//			if(task.TaskName == "")
+		//			{
+		//				mui.alert("任务名称不能为空！");
+		//				return;
+		//			}
+		//			
+		//			if(task.HandlePerson == "")
+		//			{
+		//				mui.alert("处理人不能为空！");
+		//				return;
+		//			}
+		//			
+		//			var tasklist = new Array();
+		//			var hastasklist = plus.storage.getItem("tasklist");
+		//			if(hastasklist != null)
+		//			{
+		//				var jsontasklist=JSON.parse(hastasklist);
+		//				for(var index in jsontasklist)
+		//				{
+		//					tasklist.push(jsontasklist[index]);
+		//				}
+		//			}
+		//
+		//			tasklist.push(task);
+		//			//plus.storage.setItem("tasklist",JSON.stringify(tasklist));
+		//			
+		//			openwindow("index.html",subpage_style)
+		//		});
+		//		
+		//		$("#startscan").bind("tap",function(){
+		//			openwindow("../public/scanerweima.html")
+		//		});
+		//		
 		//		$("#opencamera").bind("tap", function() {
 		//			if (mui.os.plus) {
 		//				var a = [{
@@ -311,16 +382,7 @@
 
 	function GetCurrentDateTime() {
 		var arrday = ["天", "一", "二", "三", "四", "五", "六"];
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth() + 1; //一月是0，一定要注意
-		var yyyy = today.getFullYear();
-		if(dd < 10) {
-			dd = '0' + dd
-		}
-		if(mm < 10) {
-			mm = '0' + mm
-		}
-		$("#lbldatetime")[0].innerText = yyyy + '年' + mm + '月' + dd + '日   星期' + arrday[today.getDay()];
+		var myDate = new Date();
+		$("#lbldatetime")[0].innerText = (myDate.getFullYear() + '年' + (myDate.getMonth() + 1) + '月' + myDate.getDate() + '日   星期' + arrday[myDate.getDay()]);
 	}
 </script>

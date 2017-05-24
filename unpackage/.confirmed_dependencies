@@ -30,6 +30,9 @@
 		"refer": [
 			"task/index.html",
 			"task/publish.html"
+			"task/index.html",
+			"task/publish.html",
+			"workspace/index.html"
 		]
 	},
 	"task/index.html": {
@@ -125,6 +128,12 @@
 		],
 		"refer": [
 			"task/index.html"
+		]
+	},
+	"workspace/index.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"css/icons-extra.css"
 		]
 	}
 }

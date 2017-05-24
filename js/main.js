@@ -8,36 +8,30 @@ mui.plusReady(function() {
 		swipeBack: false
 	});
 
-	//选项卡点击事件
-	mui('.mui-bar-tab').on('tap', 'a', function(e) {
-		var url = this.getAttribute('href');
-		if(url == "") {
-			return;
-		}
-
-		var pagetype = this.getAttribute('pagetype');
-		if(pagetype == "main") {
-			openwindow(url, subpage_style);
-		} else {
-			openwindow(url);
-		}
-	});
-	
-	$("#startscan").bind("tap",function(){
+	$("#startscan").bind("tap", function() {
 		openwindow("../public/scanerweima.html")
 	});
 });
 
-function openwindow(url, styles) {
+function openwindow(url, styles,extras) {
+	var webviewid = GetWebviewId(url);
 	mui.openWindow({
 		url: url,
-		createNew: false,
+		id: webviewid,
+		createNew: true,
 		show: {
 			autoShow: true
 		},
 		waiting: {
 			autoShow: true
 		},
-		styles: styles
+		styles: styles,
+		extras: extras
 	});
+}
+
+function GetWebviewId(url) {
+	var startIndex = url.indexOf("/");
+	var webviewId = url.substring(startIndex + 1);
+	return webviewId;
 }

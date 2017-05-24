@@ -8,8 +8,13 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
 		<link href="../css/mui.poppicker.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../css/iconfont.css">
+		<link href="../css/iconfont.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/main.css">
+		<style>
+			.mui-input-range .mui-input-row {
+				border-top: solid 1px #eee;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,8 +22,8 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"></h1>
 		</header>
-		<div class="mui-content">
-			<div class="mui-input-group">
+		<div class="mui-content" style="background-color: white;">
+			<div class="mui-input-range">
 				<div class="mui-input-row">
 					<label>项目名称：</label>
 					<input type="text" readonly="readonly" name="projectName">
@@ -33,13 +38,13 @@
 				</div>
 				<div class="mui-input-row">
 					<label>巡查起点：</label>
-					<input type="text" class="mui-input-clear">
+					<input type="text" class="mui-input-clear" width="60%">
 				</div>
 				<div class="mui-input-row">
 					<label>温湿度：</label>
-					<input type="number" class="mui-input-clear" style="width: 40%; padding-left: 20px;">
+					<input type="number" readonly="readonly" class="mui-input-clear" style="width: 40%; padding-left: 20px;">
 					<span style="float: right;line-height: 37px;">/</span>
-					<input type="number" class="mui-input-clear" style="width: 20%;">
+					<input type="number" readonly="readonly" class="mui-input-clear" style="width: 20%;">
 				</div>
 				<div class="mui-input-row">
 					<label>天气：</label>
@@ -51,8 +56,10 @@
 					<span style="float: right;line-height: 37px;">/</span>
 					<input type="text" readonly="readonly" class="mui-input-clear" name="level" style="width: 20%;">
 				</div>
-				<div class="mui-button-row">
-					<button type="button" id="btnComplete" class="mui-btn mui-btn-primary">完成</button>
+				<div class="mui-input-row">
+					<div class="mui-button-row">
+						<button type="button" id="btnComplete" class="mui-btn mui-btn-primary" style="width: 100%;">完成</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -62,6 +69,7 @@
 		<script src="../js/main.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/iconfont.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function() {
@@ -123,14 +131,14 @@
 				$('[name="startTime"]').on('tap', function() {
 					showTime(picker);
 				});
-				
-				$('#btnComplete').on('tap',function(){
+
+				$('#btnComplete').on('tap', function() {
 					openwindow('taskActionDetail.html');
 				})
-				
+
 				setTitle(taskName);
 			});
-			
+
 			var setTitle = function(title) {
 				document.querySelector('.mui-title').innerText = title;
 			}

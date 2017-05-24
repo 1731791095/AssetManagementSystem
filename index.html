@@ -14,7 +14,7 @@
 
 	<body>
 		<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="map/index.html" pagetype="main">
+			<a class="mui-tab-item" href="map/index.html" pagetype="main">
 				<svg class="mui-icon iconfont icon" aria-hidden="true">
 					<use xlink:href="#icon-shouye2"></use>
 				</svg>
@@ -29,7 +29,7 @@
 			<a class="mui-tab-item" href="task/publish.html" pagetype="main">
 				<svg class="mui-icon iconfont icon" aria-hidden="true">
 					<use xlink:href="#icon-fabu2"></use>
-				</svg> 
+				</svg>
 				<span class="mui-tab-label">发布</span>
 			</a>
 			<a class="mui-tab-item" href="work/index.html" pagetype="main">
@@ -48,13 +48,53 @@
 	</body>
 
 </html>
-<script src="js/mui.min.js"></script>
-<!-- jquery -->
+<script type="text/javascript" src="js/mui.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/iconfont.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" charset="utf-8">
+	//当前激活选项
+	var activeTab = "map/index.html";
+
+	var homepageid = plus.webview.currentWebview().homepageid;
+	if(homepageid != null) {
+		activeTab = homepageid;
+	}
+
+	//创建子页面，首个选项卡页面显示，其它均隐藏；
 	mui.plusReady(function() {
-		openwindow("map/index.html", subpage_style);
+		$('.mui-bar-tab a').each(function() {
+			var targetTab = this.getAttribute('href');
+			var sub = plus.webview.create(targetTab, targetTab, subpage_style);
+			if(targetTab != activeTab) {
+				sub.hide();
+			} else {
+				$(this).toggleClass("mui-active");
+			}
+
+			plus.webview.currentWebview().append(sub);
+		});
+
+		//选项卡点击事件
+		mui('.mui-bar-tab').on('tap', 'a', function(e) {
+			var targetTab = this.getAttribute('href');
+			if(activeTab == targetTab) {
+				return;
+			}
+
+			//显示目标选项卡
+			//若为iOS平台，则直接显示
+			if(mui.os.ios) {
+				plus.webview.show(targetTab);
+			} else {
+				plus.webview.show(targetTab, "fade-in", 300);
+			}
+
+			//隐藏当前;
+			plus.webview.hide(activeTab);
+
+			//更改当前活跃的选项卡
+			activeTab = targetTab;
+		});
 	});
 </script>

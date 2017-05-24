@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/main.css" rel="stylesheet" />
+		<link href="../css/mui.picker.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">资产清单</h1>
+			<a id="startscan" class="mui-icon iconfont icon-saoyisao1 mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div style="background-color: white;border-bottom: 1px solid #eee;">
+					<div style="margin-left:8px;margin-right:8px;padding-top: 10px;padding-bottom: 10px;">
+						<div class="mui-input-row mui-search">
+							<input type="search" class="mui-input-clear" placeholder="搜索">
+						</div>
+						<div class="mui-input-row">
+							<span>资产类型：</span>
+							<input type="text" id="ddlAssertsType" style="width: 78%;" readonly="readonly" value="路面">
+						</div>
+						<div class="mui-input-row">
+							<span>部件选择：</span>
+							<input type="text" id="ddlComponent" style="width: 78%;" readonly="readonly">
+						</div>
+					</div>
+				</div>
+				<div class="mui-slider-group ">
+					<div id="item1mobile " class="mui-slider-item mui-control-content mui-active ">
+						<div class="mui-scroll-wrapper ">
+							<div class="mui-scroll" id="scroll" style="background-color: white;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../js/mui.min.js "></script>
+<script type="text/javascript " src="../js/jquery-1.11.3.min.js "></script>
+<script type="text/javascript " src="../js/iconfont.js "></script>
+<script type="text/javascript " src="../js/main.js "></script>
+<script src="../js/mui.pullToRefresh.js"></script>
+<script src="../js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+<script type="text/javascript " charset="utf-8 ">
+	mui.plusReady(function() {
+
+		//阻尼系数
+		var deceleration = mui.os.ios ? 0.003 : 0.0009;
+		mui('.mui-scroll-wrapper').scroll({
+			bounce: false,
+			indicators: true, //是否显示滚动条
+			deceleration: deceleration
+		});
+
+		var ddlAssertsTypePicker = new mui.PopPicker();
+		ddlAssertsTypePicker.setData([{
+			value: '1',
+			text: '路面'
+		}, {
+			value: '2',
+			text: '路基'
+		}, {
+			value: '3',
+			text: '桥梁'
+		}, {
+			value: '4',
+			text: '涵洞'
+		}]);
+
+		var ddlAssertsTypePickerButton = $('#ddlAssertsType')[0];
+		var ddlAssertsType = $('#ddlAssertsType')[0];
+		ddlAssertsTypePickerButton.addEventListener('tap', function(event) {
+			ddlAssertsTypePicker.show(function(items) {
+				ddlAssertsType.value = items[0].text;
+			});
+		}, false);
+
+		getAssetsList();
+	});
+
+	function loadData() {
+		var assetslist = new Array();
+		for(var index = 1; index < 20; index++) {
+			var assets = {};
+			assets.AssetsName = "构件" + index;
+			assets.AssetsCode = "UC00" + index;
+			assetslist.push(assets);
+		}
+
+		plus.storage.setItem("assetslist", JSON.stringify(assetslist));
+		getAssetsList();
+		mui.toast("加载成功");
+	}
+
+	function getAssetsList() {
+		var content = "";
+		var assetslist = plus.storage.getItem("assetslist");
+		if(assetslist == null) {
+			content += "<ul class=\"mui-table-view\">";
+			content += "	<li class=\"mui-table-view-cell\">";
+			content += "		<div class=\"mui-button-row\">";
+			content += "			<button type=\"button\" id=\"btnLoadData\" class=\"mui-btn mui-btn-primary\" style=\"width: 100%;\">加载数据</button>";
+			content += "		</div>";
+			content += "	</li>";
+			content += "</ul>";
+
+			$("#scroll").html(content);
+
+			$("#btnLoadData").on('tap', function(e) {
+				loadData();
+			});
+			return;
+		}
+
+		content = "";
+		var jsontasklist = JSON.parse(assetslist);
+		if(jsontasklist.length == 0) {
+			content += "<ul class=\"mui-table-view\">";
+			content += "	<li class=\"mui-table-view-cell\">";
+			content += "		<div class=\"mui-button-row\">";
+			content += "			<button type=\"button\"  id=\"btnLoadData\" class=\"mui-btn mui-btn-primary\" style=\"width: 100%;\">加载数据</button>";
+			content += "		</div>";
+			content += "	</li>";
+			content += "</ul>";
+
+			$("#scroll").html(content);
+
+			$("#btnLoadData").on('tap', function(e) {
+				loadData();
+			});
+			return;
+		}
+
+		content = "";
+		content += "<ul class=\"mui-table-view mui-grid-view mui-grid-9\" style=\"background-color: white;\">";
+		content += "	<li class=\"mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4\">";
+		content += "		构件名称";
+		content += "	</li>";
+		content += "	<li class=\"mui-table-view-cell mui-media mui-col-xs-5 mui-col-sm-5\">";
+		content += "		位置编码";
+		content += "	</li>";
+		content += "	<li class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\">";
+		content += "		操作";
+		content += "	</li>";
+
+		for(var index in jsontasklist) {
+			var btnindex = "data" + index;
+			content += "	<li name=\"" + btnindex + "\" class=\"mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4\">";
+			content += jsontasklist[index].AssetsName;
+			content += "	</li>";
+			content += "	<li name=\"" + btnindex + "\" class=\"mui-table-view-cell mui-media mui-col-xs-5 mui-col-sm-5\">";
+			content += jsontasklist[index].AssetsCode;
+			content += "	</li>";
+			content += "	<li name=\"" + btnindex + "\" class=\"mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3\">";
+			content += "		1<button btnindex=\"" + btnindex + "\" type=\"button\" assetscode=\"" + jsontasklist[index].AssetsCode + "\" name=\"btnDelete\" class=\"mui-btn mui-btn-primary \">删除</button>";
+			content += "	</li>";
+		}
+
+		content += "</ul>";
+		$("#scroll").html(content);
+
+		mui(".mui-table-view").on('tap', "button[name=btnDelete]", function(e) {
+			var btnindex = this.getAttribute("btnindex");
+			$('.mui-table-view li').each(function() {
+				var name = this.getAttribute('name');
+				if(name == btnindex) {
+					$(this).remove();
+				}
+			});
+
+			var assetslist = plus.storage.getItem("assetslist");
+			if(assetslist == null) {
+				return;
+			}
+
+			var assetscode = this.getAttribute("assetscode");
+			var jsontasklist = JSON.parse(assetslist);
+
+			for(var index in jsontasklist) {
+				if(jsontasklist[index].AssetsCode == assetscode) {
+					jsontasklist.splice(index, 1);
+				}
+			}
+
+			if(jsontasklist.length == 0) {
+				plus.storage.removeItem("assetslist");
+				getAssetsList();
+				mui.toast("删除成功构件" + assetscode);
+				return;
+			}
+
+			plus.storage.setItem("assetslist", JSON.stringify(jsontasklist));
+			mui.toast("删除成功构件" + assetscode);
+		});
+	}
+</script>
