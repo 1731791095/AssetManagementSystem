@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/main.css" rel="stylesheet" />
+		<style>
+			#allmap {
+				height: 560px;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">桥梁资产综合管养平台</h1>
+		</header>
+		<div class="mui-content">
+			<div style="padding-left:8px;padding-right:8px;padding-top: 20px;position: absolute;z-index: 2;width: 100%;">
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" placeholder="搜索">
+				</div>
+			</div>
+			<div id="allmap">
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HR3RRyTsXYdQ3QzzG5yUkg0q"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script src="../js/mui.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.plusReady(function() {
+		plus.geolocation.getCurrentPosition(translatePoint, function(e) {
+			mui.toast("异常:" + e.message);
+		});
+	});
+
+	function translatePoint(position) {
+		var currentLon = position.coords.longitude;
+		var currentLat = position.coords.latitude;
+		var gpsPoint = new BMap.Point(currentLon, currentLat);
+		BMap.Convertor.translate(gpsPoint, 2, initMap); //坐标转换
+	}
+
+	function initMap(point) {
+		map = new BMap.Map("allmap"); //创建地图
+		map.addControl(new BMap.NavigationControl());
+		map.addControl(new BMap.ScaleControl());
+		map.addControl(new BMap.OverviewMapControl());
+
+		map.centerAndZoom(point, 15);
+
+		//自己的位置
+		{
+			var marker = new BMap.Marker(point);
+			marker.addEventListener("click", function() {
+				var infoWin = new BMap.InfoWindow("我的位置");
+				this.openInfoWindow(infoWin);
+			});
+			map.addOverlay(marker);
+		}
+
+		// 随机向地图添加标注   
+		for(var i = 0; i < 10; i++) {
+			var index = 1;
+			if(i % 2 == 0) {
+				index = -1;
+			}
+
+			var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+				offset: new BMap.Size(10, 25),
+				imageOffset: new BMap.Size(0, 0 - i * 25)
+			});
+
+			var pt = new BMap.Point(point.lng + Math.random() * 0.015 * index, point.lat + Math.random() * 0.015 * index);
+			var marker = new BMap.Marker(pt, {
+				icon: myIcon
+			});
+			marker.addEventListener("click", function() {
+				var infoWin = new BMap.InfoWindow("随机位置");
+				this.openInfoWindow(infoWin);
+			});
+			map.addOverlay(marker);
+		}
+	}
+</script>
